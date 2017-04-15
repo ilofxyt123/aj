@@ -1,0 +1,7 @@
+*.pptx
+*.pdf
+*.png
+*.jpg
+js/jquery-1.11.3.min.js
+js/tool.js
+js/browser.js
