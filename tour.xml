@@ -100,7 +100,7 @@
 		</image>
 
 		<!-- place your scene hotspots here -->
-		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="1.768" atv="-10.217"  onclick="startTip()" />
+		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="1.768" atv="-10.217"  onclick="iCon('1')" />
 		<hotspot name="tip_red"  scale="0.5"  url="images/3d_img_20_1.png" ath="38.775" atv="8.934"  onclick=""/>
 		<hotspot name="tip_blue"  scale="0.5"  url="images/3d_img_20.png" ath="38.775" atv="8.934"  onclick="" alpha="0"/>
 
@@ -129,6 +129,9 @@
 	</scene>
 	<action name="hotspotClick">
 		js(main.hotspotClick(%1));
+	</action>
+	<action name="iCon">
+		js(main.iCon(%1));
 	</action>
 
 	<action name="enterVideo">

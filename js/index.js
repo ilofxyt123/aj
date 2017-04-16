@@ -658,6 +658,15 @@
                     break;
             }
         },
+        iCon:function(n){
+            console.log(n);
+            switch(n){
+                case "1":
+                    $(".ruller").removeClass("none");
+                    $(".P_layer").fi();
+                    break;
+            }
+        },
         start:function(){
 
         },
@@ -680,8 +689,14 @@
             this.bgm.isPlay = false;
         },
         addEvent:function(){
-            var _self = this;
 
+            var _self = this;
+            document.ontouchmove = function(e){e.preventDefault();};
+            $(".txtBox").on("touchend",function () {
+                $(this).fo(function(){
+                    $(".P_layer").addClass("none");
+                });
+            });
             $(document).on("webkitAnimationEnd",function(e){
                 console.log(e)
             });
