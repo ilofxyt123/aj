@@ -84,6 +84,7 @@ a:hover {
 
 img{
     display: block;
+    position: absolute;
 }
 
 a, button, input {
@@ -137,3 +138,4 @@ a, button, input {
 }
 .opacity{opacity:0;}
 .bk-black{background-color: black;}
+.bk-theme{background-color: #13446c;}

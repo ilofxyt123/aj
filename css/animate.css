@@ -125,28 +125,94 @@
 }
 
 
-@-webkit-keyframes ani-bgmRotate {
+@-webkit-keyframes ani-Rotate1 {
     0%{
         -webkit-transform:rotate(0deg);
     }
+    /*50% {*/
+        /*-webkit-transform:rotate(360deg);*/
+    /*}*/
     100% {
         -webkit-transform:rotate(360deg);
     }
 }
-@keyframes ani-bgmRotate {
+@keyframes ani-Rotate1 {
     0%{
         transform:rotate(0deg);
     }
+    /*50% {*/
+        /*transform:rotate(360deg);*/
+    /*}*/
     100% {
         transform:rotate(360deg);
     }
 }
 
-.ani-bgmRotate{
-    -webkit-animation:ani-bgmRotate 1s linear 0s infinite forwards;
-    animation:ani-bgmRotate 1s linear 0s infinite forwards;
+.ani-Rotate1{
+    -webkit-animation:ani-Rotate1 8s linear 0s infinite forwards;
+    animation:ani-Rotate1 8s linear 0s infinite forwards;
+}
+.ani-Pause{
+    animation-play-state:paused;
+    -webkit-animation-play-state:paused;
+}
+
+
+@-webkit-keyframes ani-Rotate2 {
+    0%{
+        -webkit-transform:rotate(0deg);
+    }
+    /*50% {*/
+        /*-webkit-transform:rotate(-360deg);*/
+    /*}*/
+    100% {
+        -webkit-transform:rotate(-360deg);
+    }
+}
+@keyframes ani-Rotate2 {
+    0%{
+        transform:rotate(0deg);
+    }
+    /*50% {*/
+        /*transform:rotate(-360deg);*/
+    /*}*/
+    100% {
+        transform:rotate(-360deg);
+    }
+}
+
+.ani-Rotate2{
+    -webkit-animation:ani-Rotate2 8s linear 0s infinite forwards;
+    animation:ani-Rotate2 8s linear 0s infinite forwards;
 }
 .ani-bgmPause{
     animation-play-state:paused;
     -webkit-animation-play-state:paused;
+}
+
+@-webkit-keyframes ani-bar{
+    0% {
+        -webkit-transform: translateY(165px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0px);
+        opacity: 1;
+    }
+}
+@keyframes ani-bar{
+    0% {
+        transform: translateY(165px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.ani-bar {
+    -webkit-animation:ani-bar 1s ease-out 0s 1 normal forwards;
+    animation:ani-bar 1s ease-out 0s 1 normal forwards;
 }

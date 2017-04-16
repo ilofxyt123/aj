@@ -281,6 +281,7 @@
     };
     $.fn.extend({
         fiHandler:function(e){
+            e.stopPropagation();
             this.removeClass("opacity "+this.tp.cls);
             if(this.tp.cb){this.tp.cb();};
             this.off("webkitAnimationEnd",this.fiHandler);
@@ -288,6 +289,7 @@
             this.tp.duration = this.tp.cls = "";
         },
         foHandler:function(e){
+            e.stopPropagation();
             this.addClass("none").removeClass(this.tp.cls);
             if(this.tp.cb){this.tp.cb();};
             this.off("webkitAnimationEnd",this.foHandler);
@@ -502,7 +504,25 @@
 
         this.ImageList = [];
 
+        this.gameData = {
+            success:false,
+            haveFind : ["","",""],//底部的秘籍
+            prize:["toolBar-icon1","toolBar-icon2","toolBar-icon3"],
+        };
+        this.block1 = {
+            success:false,
+            str:[""],
+            haveFind :[],
+            prize:"toolBar-icon1"
+        };
+
         this.krpano = document.getElementById("krpanoSWFObject");
+
+        this.V = {
+            id:"video",
+            currentTime:0,
+            isPlay:false
+        };
 
         this.init();
     };
@@ -557,6 +577,7 @@
             //     $(".P_test").fo(800);
             //     $(".P_vr").fi(800);
             // })
+            console.log("我是test");
             var _self = this;
             setTimeout(function(){
                 _self.p1leave();
@@ -567,15 +588,75 @@
             $(".P_bg").fo();
         },
         pvr:function(){
-            $(".P_vr").removeClass("none");
+            this.banTouchVr();
+            var _self = this;
+            $(".P_vr").fi(function(){
+                // setTimeout(function(){
+                //     $(".toolBar").addClass("ani-bar");
+                // },1000)
+            });
             this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
-            // var _self = this;
-            // $(".P_vr").fi(1000,function(){
-            //     _self.enterVR();
-            // });
+            this.rotateView();
         },
         enterVR:function(){
-            console.log("进入VR")
+
+        },
+        rotateView:function(){
+            var _self = this;
+            setTimeout(function(){
+                Math.animation(0,
+                               360,
+                               6500,
+                               'Sine.easeInOut',
+                               function (value) {
+                                   _self.krpano.call("set(view[v2].hlookat,'"+value+"');");
+                               },
+                               function(){
+                                   console.log("视角转动结束");
+                                   _self.allowTouchVr();
+                                       $(".toolBar").addClass("ani-bar");
+                               }
+                );
+            },1000);
+
+        },
+        banTouchVr:function(){
+            $(".P_banTouch").removeClass("none");
+        },
+        allowTouchVr:function(){
+            $(".P_banTouch").addClass("none");
+        },
+        hotspotClick:function(n){
+            switch(n){
+                case "21":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
+                    break;
+                case "22":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_2_l].alpha,1)");
+                    break;
+                case "23":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_3_l].alpha,1)");
+                    break;
+                case "24":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_4_l].alpha,1)");
+                    break;
+                case "41":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_1_l].alpha,1)");
+                    break;
+                case "42":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_2_l].alpha,1)");
+                    break;
+                case "43":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    break;
+            }
         },
         start:function(){
 
@@ -601,6 +682,9 @@
         addEvent:function(){
             var _self = this;
 
+            $(document).on("webkitAnimationEnd",function(e){
+                console.log(e)
+            });
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
                 {
@@ -623,8 +707,9 @@
 /*-----------------------------事件绑定--------------------------------*/
 }(window));
 $(function(){
-    var main = new Main();
+    window.main = new Main();
     main.test();
+    main.addEvent();
 });
 
 
