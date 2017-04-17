@@ -203,7 +203,7 @@
             if (window.console) {
                 console.error('from和to两个参数必须且为数值');
             }
-            return 0;
+            // return 0;
         }
 
         // 缓动算法
@@ -260,9 +260,12 @@
         }
 
         // 运动
+        var value = [];
         var step = function() {
             // 当前的运动位置
-            var value = fnGetValue(start, from, to - from, during);
+            for(var i =0;i<from.length;i++){
+                value[i] = fnGetValue(start, from[i], to[i] - from[i], during);
+            }
 
             // 时间递增
             start++;
@@ -463,11 +466,11 @@
     };
     Media.WxMediaInit();
     var Main = function(){
-        this.clockSwitch;
+        this.clockSwitch;//Interval或Timeout句柄
 
-        this.pages = ["pact",""];
+        this.pages = ["",""];//页面跳转管理
 
-        this.touch ={
+        this.touch ={//touch数据
             ScrollObj:undefined,
             isScroll:false,
             limitUp:0,
@@ -486,11 +489,19 @@
             "3如果有一天，我老无所依，请把我留在，在这春天里，如果有一天，我悄然离去，请把我埋在，在这春天里，春天里……"
         ];
         
-        this.printer = {
-            printStr:"",
-            printLen:0,
-            $container:undefined,
-            now:0
+        this.printer = {//打字机
+            printStr:"",//要打印的字符串
+            printLen:0,//打印字符串的长度
+            $container:undefined,//打印机的容器
+            now:0//已打印文字长度
+        };
+
+        this.view = {//krpano视角转动
+            startH:0,//起始横坐标
+            startV:0,//起始纵坐标
+            endH:0,//终点横坐标
+            endV:0,//终点纵坐标
+            point:[{}, {h:1.768, v:0},{h:133.793, v:0},{h:-45.823, v:0}]//多个需要转到的角度
         };
 
         this.bgm ={
@@ -516,9 +527,9 @@
             prize:"toolBar-icon1"
         };
 
-        this.krpano = document.getElementById("krpanoSWFObject");
+        this.krpano;
 
-        this.V = {
+        this.V = {//视频
             id:"video",
             currentTime:0,
             isPlay:false
@@ -552,7 +563,7 @@
                 $(obj).val(value);
             }
         },
-        print:function(string,$obj,speed,callback){
+        print:function(string,$obj,speed,callback){//打字机，传入的参数:待打印字符串，容器，定时器的间隔,打印结束回调函数
             var _self = this;
             _self.printer.$container = $obj;
             _self.printer.printStr = string;
@@ -577,6 +588,7 @@
             //     $(".P_test").fo(800);
             //     $(".P_vr").fi(800);
             // })
+            this.krpano = document.getElementById("krpanoSWFObject");
             console.log("我是test");
             var _self = this;
             setTimeout(function(){
@@ -586,6 +598,9 @@
         },
         p1leave:function(){
             $(".P_bg").fo();
+        },
+        loadVr:function(){
+            embedpano({swf:"tour.swf", xml:"tour.xml?c", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.banTouchVr();
@@ -604,15 +619,16 @@
         rotateView:function(){
             var _self = this;
             setTimeout(function(){
-                Math.animation(0,
-                               360,
+                Math.animation([0],
+                               [360],
                                6500,
                                'Sine.easeInOut',
                                function (value) {
-                                   _self.krpano.call("set(view[v2].hlookat,'"+value+"');");
+                                   _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
                                },
                                function(){
                                    console.log("视角转动结束");
+                                   _self.krpano.call("set(view[v2].hlookat,'0');");
                                    _self.allowTouchVr();
                                        $(".toolBar").addClass("ani-bar");
                                }
@@ -658,14 +674,95 @@
                     break;
             }
         },
-        iCon:function(n){
-            console.log(n);
+        fixView:function(hd,compare){
+            var round = Math.abs(parseInt(hd/360));//圈数处理
+            if(hd>0){
+                hd = hd-360*round;
+            }
+            else{
+                hd = hd+360*round;
+            }
+            console.log(hd);
+            // var sub((compare-hd)/360)//相差的度数除以360，得到圈数
+            return hd;
+            //此时弧度在正负360度以内;
+            // if(compare>hd){
+            //
+            // }
+        },
+        setIconLayerTxt:function(n){
             switch(n){
                 case "1":
-                    $(".ruller").removeClass("none");
-                    $(".P_layer").fi();
                     break;
-            }
+                case "2":
+                    break;
+                case "3":
+                    break;
+            };
+        },
+        iCon:function(n){
+            var _self = this;
+            _self.banTouchVr();//禁止触摸
+
+            _self.processViewData(n);//处理视角
+
+            _self.setIconLayerTxt(n);//增加第n个icon对应的laery中的文字
+
+            Math.animation([_self.view.h,_self.view.v],
+                [_self.view.endH,_self.view.endV],
+                1000,
+                'Sine.easeInOut',
+                function (value) {
+                    _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+                    _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
+                },
+                function(){
+                    switch(n){
+                        case "1":
+                            $(".op-icon1").removeClass("none");
+                            break;
+                        case "2":
+                            $(".op-icon2").removeClass("none");
+                            break;
+                        case "3":
+                            $(".op-icon3").removeClass("none");
+                            break;
+                    }
+                    _self.allowTouchVr();//允许touch
+                    $(".P_layer").fi();//layer出现
+                }
+            );
+            // switch(n){
+            //     case "1":
+            //         _self.view.h = _self.fixView(_self.krpano.get("view[v2].hlookat"),_self.view.endH);//第一个高亮icon横坐标
+            //         _self.view.v = _self.fixView(_self.krpano.get("view[v2].vlookat"),_self.view.endV);//第一个高亮icon纵坐标
+            //         // Math.animation([_self.krpano.get("view[v2].hlookat"),_self.krpano.get("view[v2].vlookat")],
+            //         Math.animation([_self.view.h,_self.view.v],
+            //                         [_self.view.endH,_self.view.endV],
+            //                         1000,
+            //                         'Sine.easeInOut',
+            //                         function (value) {
+            //                             _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+            //                             _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
+            //                         },
+            //                         function(){
+            //                             $(".ruller").removeClass("none");
+            //                             $(".P_layer").fi();
+            //                             _self.allowTouchVr();
+            //                         }
+            //         );
+            //         // $(".ruller").removeClass("none");
+            //         // $(".P_layer").fi();
+            //         break;
+            // }
+        },
+        processViewData:function(n){
+            var _self = this;
+            _self.view.endH = _self.view.point[n].h;//第n个高亮icon横坐标
+            _self.view.endV = _self.view.point[n].v;//第n个高亮icon纵坐标
+
+            _self.view.h = _self.fixView(_self.krpano.get("view[v2].hlookat"),_self.view.endH);//修复一下当前水平视角的值，避免359度转到1度需要大幅度转动,两个参数:当前所在视角，终点视角
+            _self.view.v = _self.fixView(_self.krpano.get("view[v2].vlookat"),_self.view.endV);//修复一下当前视角的值，避免359度转到1度需要大幅度转动
         },
         start:function(){
 
@@ -679,7 +776,7 @@
             this.touch.limitDown = this.touch.ScrollObj.height()<start?0:(start-this.touch.ScrollObj.height());
         },
         playbgm:function(){
-            Media.playMedia(this.bgm.obj.id)
+            Media.playMedia(this.bgm.obj.id);
             this.bgm.button.addClass("ani-bgmRotate");
             this.bgm.isPlay = true;
         },
@@ -692,11 +789,19 @@
 
             var _self = this;
             document.ontouchmove = function(e){e.preventDefault();};
-            $(".txtBox").on("touchend",function () {
+
+            /////////P_layer//////////
+            $(".ui-txtBox").on("touchend",function () {
                 $(this).fo(function(){
                     $(".P_layer").addClass("none");
+                    switch(_self.router){
+                        case "1":
+                            break;
+                    }
                 });
             });
+            /////////P_layer//////////
+
             $(document).on("webkitAnimationEnd",function(e){
                 console.log(e)
             });
@@ -716,6 +821,9 @@
         },
         easeOut:function(nowTime,startPosition,delta,duration){
             return -delta*(nowTime/=duration)*(nowTime-2)+startPosition;
+        },
+        min:function(a,b){
+            return (a>b?b:a);
         }
     };
     a.Main = Main;
@@ -723,6 +831,7 @@
 }(window));
 $(function(){
     window.main = new Main();
+    main.loadVr();
     main.test();
     main.addEvent();
 });
