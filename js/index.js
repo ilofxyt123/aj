@@ -520,7 +520,29 @@
             haveFind : ["","",""],//底部的秘籍
             prize:["toolBar-icon1","toolBar-icon2","toolBar-icon3"],
         };
-        this.block1 = {
+        this.layer = {
+            $txt1:undefined,
+            $txt2:$(".op-icon2 .addTxt"),
+            $txt3:$(".op-icon3 .addTxt")
+        };
+        this.IconStr = {
+            Icon1:["",""],
+            Icon2:["请在视频中找到xxx","你已收集到此处图鉴，请寻找其他互动区域"],
+            Icon3:["芝士蛋糕越来越受到年轻一代的喜爱，我正在制作半熟芝士，帮我找一下奶油干酪吧","你已收集到此处图鉴，请寻找其他互动区域"]
+        };
+        this.block1 = {//视频区域
+            success:false,
+            str:[""],
+            haveFind :[],
+            prize:"toolBar-icon1"
+        };
+        this.block2 = {//糕点区域
+            success:false,
+            str:[""],
+            haveFind :[],
+            prize:"toolBar-icon1"
+        };
+        this.block3 = {//厨师区域
             success:false,
             str:[""],
             haveFind :[],
@@ -634,7 +656,6 @@
                                }
                 );
             },1000);
-
         },
         banTouchVr:function(){
             $(".P_banTouch").removeClass("none");
@@ -644,6 +665,9 @@
         },
         hotspotClick:function(n){
             switch(n){
+                case "11"://视频
+                    $(".blue-mask").fi();
+                    break;
                 case "21":
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
                     this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
@@ -656,19 +680,19 @@
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
                     this.krpano.call("set(hotspot[block2_3_l].alpha,1)");
                     break;
-                case "24":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_4_l].alpha,1)");
-                    break;
-                case "41":
+                case "31":
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
                     this.krpano.call("set(hotspot[block4_1_l].alpha,1)");
                     break;
-                case "42":
+                case "32":
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
                     this.krpano.call("set(hotspot[block4_2_l].alpha,1)");
                     break;
-                case "43":
+                case "33":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    break;
+                case "34":
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
                     this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
                     break;
@@ -692,11 +716,23 @@
         },
         setIconLayerTxt:function(n){
             switch(n){
-                case "1":
+                case "1"://迎宾区
                     break;
-                case "2":
+                case "2"://视频区
+                    if(this.block1.success){//找到物品后，视频区域icon文字
+                        this.layer.$txt2.html(this.IconStr.Icon2[1]);
+                    }
+                    else{
+                        this.layer.$txt2.html(this.IconStr.Icon2[0]);
+                    }
                     break;
-                case "3":
+                case "3"://厨师区
+                    if(this.block3.success){//找到物品后，视频区域icon文字
+                        this.layer.$txt3.html(this.IconStr.Icon3[1]);
+                    }
+                    else{
+                        this.layer.$txt3.html(this.IconStr.Icon3[0]);
+                    }
                     break;
             };
         },
