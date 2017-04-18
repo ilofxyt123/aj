@@ -540,7 +540,7 @@
             success:false,
             str:[""],
             haveFind :[],
-            prize:"toolBar-icon1"
+            prize:"toolBar-icon1",
         };
         this.block3 = {//厨师区域
             success:false,
@@ -851,6 +851,21 @@
                 });
             });
             /////////P_layer//////////
+
+            /////////blue-mask//////////
+            $(".mask-btn1").on("",function(){
+                console.log("恭喜你，选对了正确答案");
+                $(".blue-mask").fo();
+            });
+            $(".mask-btn2").on("",function(){
+                console.log("答案不正确，请继续选择");
+            });
+            $(".mask-btn3").on("",function(){
+                console.log("答案不正确，请继续选择");
+            });
+            /////////blue-mask//////////
+
+
 
             $(document).on("webkitAnimationEnd",function(e){
                 console.log(e)
