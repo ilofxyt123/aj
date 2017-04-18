@@ -560,9 +560,7 @@
         this.init();
     };
     Main.prototype = {
-        init:function(){
-            console.log("init");
-        },
+        //////////////辅助类函数/////////////
         lazyLoad : function(){
             var a = $(".lazy");
             var len = a.length;
@@ -584,7 +582,7 @@
                 value = value.substring(0,11);
                 $(obj).val(value);
             }
-        },
+        },//限制手机号长度
         print:function(string,$obj,speed,callback){//打字机，传入的参数:待打印字符串，容器，定时器的间隔,打印结束回调函数
             var _self = this;
             _self.printer.$container = $obj;
@@ -601,102 +599,46 @@
                     clearInterval(_self.clockSwitch);
                     _self.clockSwitch = undefined;
                 }
-                
-            },speed);
-            
-        },
-        test:function(){
-            // this.print(this.Str[0],$(".op-printer"),100,function(){
-            //     $(".P_test").fo(800);
-            //     $(".P_vr").fi(800);
-            // })
-            this.krpano = document.getElementById("krpanoSWFObject");
-            console.log("我是test");
-            var _self = this;
-            setTimeout(function(){
-                _self.p1leave();
-                _self.pvr();
-            },1000);
-        },
-        p1leave:function(){
-            $(".P_bg").fo();
-        },
-        loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?c", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
-        },
-        pvr:function(){
-            this.banTouchVr();
-            var _self = this;
-            $(".P_vr").fi(function(){
-                // setTimeout(function(){
-                //     $(".toolBar").addClass("ani-bar");
-                // },1000)
-            });
-            this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
-            this.rotateView();
-        },
-        enterVR:function(){
 
-        },
+            },speed);
+
+        },//打字机
+        banTouchVr:function(){
+            $(".P_banTouch").removeClass("none");
+        },//禁止拖拽场景
+        allowTouchVr:function(){
+            $(".P_banTouch").addClass("none");
+        },//允许拖拽场景
+        scrollInit:function(selector,start){
+            this.touch.ScrollObj = $(selector);
+            this.touch.StartY = 0;
+            this.touch.NewY = 0;
+            this.touch.addY = 0;
+            this.touch.scrollY = 0;
+            this.touch.limitDown = this.touch.ScrollObj.height()<start?0:(start-this.touch.ScrollObj.height());
+        },//初始化滚动
+        min:function(a,b){
+            return (a>b?b:a);
+        },//获取较小的数
+
         rotateView:function(){
             var _self = this;
             setTimeout(function(){
                 Math.animation([0],
-                               [360],
-                               6500,
-                               'Sine.easeInOut',
-                               function (value) {
-                                   _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
-                               },
-                               function(){
-                                   console.log("视角转动结束");
-                                   _self.krpano.call("set(view[v2].hlookat,'0');");
-                                   _self.allowTouchVr();
-                                       $(".toolBar").addClass("ani-bar");
-                               }
+                    [360],
+                    6500,
+                    'Sine.easeInOut',
+                    function (value) {
+                        _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+                    },
+                    function(){
+                        console.log("视角转动结束");
+                        _self.krpano.call("set(view[v2].hlookat,'0');");
+                        _self.allowTouchVr();
+                        $(".toolBar").addClass("ani-bar");
+                    }
                 );
             },1000);
-        },
-        banTouchVr:function(){
-            $(".P_banTouch").removeClass("none");
-        },
-        allowTouchVr:function(){
-            $(".P_banTouch").addClass("none");
-        },
-        hotspotClick:function(n){
-            switch(n){
-                case "11"://视频
-                    $(".blue-mask").fi();
-                    break;
-                case "21":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
-                    break;
-                case "22":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_2_l].alpha,1)");
-                    break;
-                case "23":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_3_l].alpha,1)");
-                    break;
-                case "31":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_1_l].alpha,1)");
-                    break;
-                case "32":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_2_l].alpha,1)");
-                    break;
-                case "33":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
-                    break;
-                case "34":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
-                    break;
-            }
         },
         fixView:function(hd,compare){
             var round = Math.abs(parseInt(hd/360));//圈数处理
@@ -736,6 +678,17 @@
                     break;
             };
         },
+        processViewData:function(n){
+            var _self = this;
+            _self.view.endH = _self.view.point[n].h;//第n个高亮icon横坐标
+            _self.view.endV = _self.view.point[n].v;//第n个高亮icon纵坐标
+
+            _self.view.h = _self.fixView(_self.krpano.get("view[v2].hlookat"),_self.view.endH);//修复一下当前水平视角的值，避免359度转到1度需要大幅度转动,两个参数:当前所在视角，终点视角
+            _self.view.v = _self.fixView(_self.krpano.get("view[v2].vlookat"),_self.view.endV);//修复一下当前视角的值，避免359度转到1度需要大幅度转动
+        },
+        //////////////辅助类函数/////////////
+
+        //////////////kp对外/////////////
         iCon:function(n){
             var _self = this;
             _self.banTouchVr();//禁止触摸
@@ -791,26 +744,87 @@
             //         // $(".P_layer").fi();
             //         break;
             // }
-        },
-        processViewData:function(n){
-            var _self = this;
-            _self.view.endH = _self.view.point[n].h;//第n个高亮icon横坐标
-            _self.view.endV = _self.view.point[n].v;//第n个高亮icon纵坐标
+        },//红色高亮Icon
+        hotspotClick:function(n){
+            switch(n){
+                case "11"://视频
+                    $(".blue-mask").fi();
+                    break;
+                case "21":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
+                    break;
+                case "22":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_2_l].alpha,1)");
+                    break;
+                case "23":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block2_3_l].alpha,1)");
+                    break;
+                case "31":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_1_l].alpha,1)");
+                    break;
+                case "32":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_2_l].alpha,1)");
+                    break;
+                case "33":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    break;
+                case "34":
+                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
+                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    break;
+            }
+        },//普通热点
+        //////////////kp对外/////////////
 
-            _self.view.h = _self.fixView(_self.krpano.get("view[v2].hlookat"),_self.view.endH);//修复一下当前水平视角的值，避免359度转到1度需要大幅度转动,两个参数:当前所在视角，终点视角
-            _self.view.v = _self.fixView(_self.krpano.get("view[v2].vlookat"),_self.view.endV);//修复一下当前视角的值，避免359度转到1度需要大幅度转动
+        //////////////流程类函数/////////////
+        init:function(){
+            console.log("init");
         },
         start:function(){
 
         },
-        scrollInit:function(selector,start){
-            this.touch.ScrollObj = $(selector);
-            this.touch.StartY = 0;
-            this.touch.NewY = 0;
-            this.touch.addY = 0;
-            this.touch.scrollY = 0;
-            this.touch.limitDown = this.touch.ScrollObj.height()<start?0:(start-this.touch.ScrollObj.height());
+        test:function(){
+            // this.print(this.Str[0],$(".op-printer"),100,function(){
+            //     $(".P_test").fo(800);
+            //     $(".P_vr").fi(800);
+            // })
+            this.krpano = document.getElementById("krpanoSWFObject");
+            console.log("我是test");
+            var _self = this;
+            setTimeout(function(){
+                _self.p1leave();
+                _self.pvr();
+            },1000);
         },
+        p1leave:function(){
+            $(".P_bg").fo();
+        },
+        loadVr:function(){
+            embedpano({swf:"tour.swf", xml:"tour.xml?c", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+        },
+        pvr:function(){
+            this.banTouchVr();
+            var _self = this;
+            $(".P_vr").fi(function(){
+                // setTimeout(function(){
+                //     $(".toolBar").addClass("ani-bar");
+                // },1000)
+            });
+            this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
+            this.rotateView();
+        },
+        enterVR:function(){
+
+        },
+        //////////////流程类函数/////////////
+
+
         playbgm:function(){
             Media.playMedia(this.bgm.obj.id);
             this.bgm.button.addClass("ani-bgmRotate");
@@ -858,9 +872,7 @@
         easeOut:function(nowTime,startPosition,delta,duration){
             return -delta*(nowTime/=duration)*(nowTime-2)+startPosition;
         },
-        min:function(a,b){
-            return (a>b?b:a);
-        }
+
     };
     a.Main = Main;
 /*-----------------------------事件绑定--------------------------------*/
