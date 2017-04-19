@@ -201,7 +201,7 @@
 
         if (!isNumber(from) || !isNumber(to)) {
             if (window.console) {
-                console.error('from和to两个参数必须且为数值');
+                // console.log('from和to两个参数必须且为数值');
             }
             // return 0;
         }
@@ -287,7 +287,7 @@
             e.stopPropagation();
             this.removeClass("opacity "+this.tp.cls);
             if(this.tp.cb){this.tp.cb();};
-            this.off("webkitAnimationEnd",this.fiHandler);
+            this.off("webkitAnimationEnd");
             this.tp.cb = undefined;
             this.tp.duration = this.tp.cls = "";
         },
@@ -295,7 +295,7 @@
             e.stopPropagation();
             this.addClass("none").removeClass(this.tp.cls);
             if(this.tp.cb){this.tp.cb();};
-            this.off("webkitAnimationEnd",this.foHandler);
+            this.off("webkitAnimationEnd");
             this.tp.cb = undefined;
             this.tp.duration = this.tp.cls = "";
         },
@@ -501,7 +501,7 @@
             startV:0,//起始纵坐标
             endH:0,//终点横坐标
             endV:0,//终点纵坐标
-            point:[{}, {h:1.768, v:0},{h:133.793, v:0},{h:-45.823, v:0}]//多个需要转到的角度
+            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0}]//多个需要转到的角度
         };
 
         this.bgm ={
@@ -517,44 +517,55 @@
 
         this.gameData = {
             success:false,
-            haveFind : ["","",""],//底部的秘籍
+            haveFind : [],//底部的秘籍
             prize:["toolBar-icon1","toolBar-icon2","toolBar-icon3"],
         };
         this.layer = {
-            $txt1:undefined,
+            $page:$(".P_layer"),
+            $container1:$(".op-icon1"),
+            $container2:$(".op-icon2"),
+            $container3:$(".op-icon3"),
+            $txt1:$(".op-icon1 .addTxt"),
             $txt2:$(".op-icon2 .addTxt"),
             $txt3:$(".op-icon3 .addTxt")
         };
-        this.IconStr = {
-            Icon1:["",""],
-            Icon2:["请在视频中找到xxx","你已收集到此处图鉴，请寻找其他互动区域"],
-            Icon3:["芝士蛋糕越来越受到年轻一代的喜爱，我正在制作半熟芝士，帮我找一下奶油干酪吧","你已收集到此处图鉴，请寻找其他互动区域"]
-        };
         this.block1 = {//视频区域
             success:false,
-            str:[""],
+            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
+            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择"],
+            iconStr:"点击视频查看，找到XXX，即可获取创之视角图鉴。",
             haveFind :[],
-            prize:"toolBar-icon1"
+            $toolIcon:$(".btn1"),//创之视角
         };
         this.block2 = {//糕点区域
             success:false,
-            str:[""],
+            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
+            spotStr:["恭喜您激活了密之配方"],
+            iconStr:"点击展柜中的产品查看配方即可获取密之配方图鉴",
             haveFind :[],
-            prize:"toolBar-icon1",
+            $toolIcon:$(".btn2"),//密之配方
         };
         this.block3 = {//厨师区域
             success:false,
-            str:[""],
+            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
+            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择"],
+            iconStr:"芝士蛋糕越来越受到年轻一代的喜爱，我正在制作半熟芝士，帮我找一下奶油干酪吧",
             haveFind :[],
-            prize:"toolBar-icon1"
+            $toolIcon:$(".btn3"),//厨之奥义
         };
+        this.block4 = {
+            spotStr:["奶油泡芙","抹茶饼干"],
+        };
+        this.WhitePointStr = ["与销售面对面沟通，进一步商业洽谈","查看更多商业解决方案，联系现场销售获得内容","流动播放品牌产品和渠道资讯，更有互动惊喜等待大家","活动现场有新品发布，欢迎来到活动现场一同见证!","提供前店后厨的全套解决方案","最红最潮流的配方演示"];
+
 
         this.krpano;
 
         this.V = {//视频
             id:"video",
             currentTime:0,
-            isPlay:false
+            isPlay:false,
+            obj:document.getElementById("video")
         };
 
         this.init();
@@ -658,33 +669,169 @@
         },
         setIconLayerTxt:function(n){
             switch(n){
-                case "1"://迎宾区
+                case "s"://迎宾区
+                    console.log("迎宾区文字不需要设置");
                     break;
-                case "2"://视频区
+                case "1"://视频区
                     if(this.block1.success){//找到物品后，视频区域icon文字
-                        this.layer.$txt2.html(this.IconStr.Icon2[1]);
+                        this.layer.$txt1.html(this.block1.successStr);
                     }
                     else{
-                        this.layer.$txt2.html(this.IconStr.Icon2[0]);
+                        this.layer.$txt1.html(this.block1.iconStr);
+                    }
+                    break;
+                case "2"://糕点区
+                    if(this.block1.success){//找到物品后，视频区域icon文字
+                        this.layer.$txt2.html(this.block2.successStr);
+                    }
+                    else{
+                        this.layer.$txt2.html(this.block2.iconStr);
                     }
                     break;
                 case "3"://厨师区
                     if(this.block3.success){//找到物品后，视频区域icon文字
-                        this.layer.$txt3.html(this.IconStr.Icon3[1]);
+                        this.layer.$txt3.html(this.block3.successStr);
                     }
                     else{
-                        this.layer.$txt3.html(this.IconStr.Icon3[0]);
+                        this.layer.$txt3.html(this.block3.iconStr);
                     }
                     break;
             };
-        },
+        },//设置高亮icon提示文字
+        setSpotLayerTxt:function(n){
+            switch(n){
+                ////////////////////////糕点区域/////////////////////////
+                case "21":
+                    if(this.block2.success){
+                        this.layer.$txt2.html(this.block2.successStr);
+                    }
+                    else{
+                        this.getKey(2);
+                        this.layer.$txt2.html(this.block2.spotStr);
+                    }
+                    break;
+                case "22":
+                    if(this.block2.success){
+                        this.layer.$txt2.html(this.block2.successStr);
+                    }
+                    else{
+                        this.getKey(2);
+                        this.layer.$txt2.html(this.block2.spotStr);
+                    }
+                    break;
+                case "23":
+                    if(this.block2.success){
+                        this.layer.$txt2.html(this.block2.successStr);
+                    }
+                    else{
+                        this.getKey(2);
+                        this.layer.$txt2.html(this.block2.spotStr);
+                    }
+                    break;
+                ////////////////////////糕点区域/////////////////////////
+
+                ////////////////////////厨师区域/////////////////////////
+                case "31":
+                    if(this.block3.success){
+                        this.layer.$txt3.html(this.block3.successStr);
+                    }
+                    else{
+                        this.getKey(3);
+                        this.layer.$txt3.html(this.block3.spotStr[0]);
+                    }
+                break;
+                case "32":
+                    if(this.block3.success){
+                        this.layer.$txt3.html(this.block3.successStr);
+                    }
+                    else{
+                        this.getKey(3);
+                        this.layer.$txt3.html(this.block3.spotStr[1]);
+                    }
+                    break;
+                case "33":
+                    if(this.block3.success){
+                        this.layer.$txt3.html(this.block3.successStr);
+                    }
+                    else{
+                        this.layer.$txt3.html(this.block3.spotStr[2]);
+                    }
+                    break;
+                case "34":
+                    if(this.block3.success){
+                        this.layer.$txt3.html(this.block3.successStr);
+                    }
+                    else{
+                        this.layer.$txt3.html(this.block3.spotStr[3]);
+                    }
+                    break;
+                ////////////////////////厨师区域/////////////////////////
+
+                ////////////////////////后厨展示/////////////////////////
+                case "41"://抹茶饼干
+                        this.layer.$txt3.html(this.block4.spotStr[1]);
+                    break;
+                case "42"://奶油泡芙
+                    this.layer.$txt3.html(this.block4.spotStr[0]);
+                    break;
+                ////////////////////////后厨展示/////////////////////////
+
+                ////////////////////////白点/////////////////////////
+                case "w1":
+                    this.layer.$txt3.html(this.WhitePointStr[0]);
+                    break;
+                case "w2":
+                    this.layer.$txt3.html(this.WhitePointStr[1]);
+                    break;
+                case "w3":
+                    this.layer.$txt3.html(this.WhitePointStr[2]);
+                    break;
+                case "w4":
+                    this.layer.$txt3.html(this.WhitePointStr[3]);
+                    break;
+                case "w5":
+                    this.layer.$txt3.html(this.WhitePointStr[4]);
+                    break;
+                case "w6":
+                    this.layer.$txt3.html(this.WhitePointStr[5]);
+                    break;
+                ////////////////////////白点/////////////////////////
+
+
+            }
+
+        },//设置普通热点提示文字
         processViewData:function(n){
             var _self = this;
+            if(n=="s"){
+                n = 0;
+            }
             _self.view.endH = _self.view.point[n].h;//第n个高亮icon横坐标
             _self.view.endV = _self.view.point[n].v;//第n个高亮icon纵坐标
 
             _self.view.h = _self.fixView(_self.krpano.get("view[v2].hlookat"),_self.view.endH);//修复一下当前水平视角的值，避免359度转到1度需要大幅度转动,两个参数:当前所在视角，终点视角
             _self.view.v = _self.fixView(_self.krpano.get("view[v2].vlookat"),_self.view.endV);//修复一下当前视角的值，避免359度转到1度需要大幅度转动
+        },
+        getKey:function(n){
+            var _self = this;
+            switch(n){
+                case 1:
+                    this.block1.success = true;
+                    $(".btn1 .default").addClass("none");
+                    $(".btn1 .light").removeClass("none");
+                    // $(".btn1 .default").fo();
+                    break;
+                case 2:
+                    this.block2.success = true;
+                    $(".btn2 .default").addClass("none");
+                    $(".btn2 .light").removeClass("none");
+                    break;
+                case 3:
+                    this.block3.success = true;
+                    $(".btn3 .default").addClass("none");
+                    $(".btn3 .light").removeClass("none");
+                    break;
+            }
         },
         //////////////辅助类函数/////////////
 
@@ -707,13 +854,16 @@
                 },
                 function(){
                     switch(n){
-                        case "1":
+                        case "s"://迎宾区
+                            $(".op-icons").removeClass("none");
+                            break;
+                        case "1"://视频区域
                             $(".op-icon1").removeClass("none");
                             break;
-                        case "2":
+                        case "2"://糕点区域
                             $(".op-icon2").removeClass("none");
                             break;
-                        case "3":
+                        case "3"://厨师区域
                             $(".op-icon3").removeClass("none");
                             break;
                     }
@@ -746,39 +896,55 @@
             // }
         },//红色高亮Icon
         hotspotClick:function(n){
+            this.setSpotLayerTxt(n);
             switch(n){
                 case "11"://视频
                     $(".blue-mask").fi();
                     break;
-                case "21":
+                case "21"://小吃
                     // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
+                    // this.krpano.call("set(hotspot[block2_1_l].alpha,1)");
+                    this.layer.$container2.removeClass("none");
+                    this.layer.$page.fi();
                     break;
                 case "22":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_2_l].alpha,1)");
+                    this.layer.$container2.removeClass("none");
+                    this.layer.$page.fi();
                     break;
                 case "23":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block2_3_l].alpha,1)");
+                    this.layer.$container2.removeClass("none");
+                    this.layer.$page.fi();
                     break;
-                case "31":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_1_l].alpha,1)");
+                case "31"://厨师区域
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
                     break;
                 case "32":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_2_l].alpha,1)");
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
                     break;
                 case "33":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
                     break;
                 case "34":
-                    // this.krpano.call("set(hotspot[block4_1_l].visible,true)");
-                    this.krpano.call("set(hotspot[block4_3_l].alpha,1)");
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
+                    break;
+                case "41":
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
+                    break;
+                case "42":
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
+                    break;
+                default:
+                    this.layer.$container3.removeClass("none");
+                    this.layer.$page.fi();
                     break;
             }
+
         },//普通热点
         //////////////kp对外/////////////
 
@@ -806,7 +972,7 @@
             $(".P_bg").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?c", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?d", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.banTouchVr();
@@ -838,6 +1004,7 @@
         addEvent:function(){
 
             var _self = this;
+            var ios = Utils.browser("iPhone");
             document.ontouchmove = function(e){e.preventDefault();};
 
             /////////P_layer//////////
@@ -853,23 +1020,54 @@
             /////////P_layer//////////
 
             /////////blue-mask//////////
-            $(".mask-btn1").on("",function(){
+            $(".mask-btn1").on("touchend",function(){
                 console.log("恭喜你，选对了正确答案");
+                if(!_self.block1.success){
+                    _self.getKey(1);
+                }
                 $(".blue-mask").fo();
             });
-            $(".mask-btn2").on("",function(){
+            $(".mask-btn2").on("touchend",function(){
                 console.log("答案不正确，请继续选择");
             });
-            $(".mask-btn3").on("",function(){
+            $(".mask-btn3").on("touchend",function(){
                 console.log("答案不正确，请继续选择");
+            });
+            // $(".play-btn").on("touchend",function(){
+            //     _self.V.obj.play();
+            //     $(this).fo();
+            // });
+
+            $(_self.V.obj).on({
+                pause:function(){
+                    alert("视频暂停");
+                },
+                ended:function(){
+                    alert("视频end了")
+                }
+            });
+            $(".videoBox").on("touchend",function(){
+                if(ios){
+                    if(_self.V.isPlay){
+                        _self.V.obj.pause();
+                        _self.V.isPlay = false;
+                        $(".play-btn").fi();
+                    }
+                    else{
+                        _self.V.obj.play();
+                        _self.V.isPlay = true;
+                        $(".play-btn").fo();
+                    }
+                }
+                else{
+                    console.log("安卓");
+                }
             });
             /////////blue-mask//////////
 
 
 
-            $(document).on("webkitAnimationEnd",function(e){
-                console.log(e)
-            });
+
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
                 {
