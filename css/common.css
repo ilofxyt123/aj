@@ -138,4 +138,25 @@ a, button, input {
 }
 .opacity{opacity:0;}
 .bk-black{background-color: black;}
-.bk-theme{background-color: #13446c;}
+.bk-theme{background-color: #023866;}
+.scale09{
+    transform:scale(0.9);
+}
+.scale08{
+    transform:scale(0.8);
+}
+.scale07{
+    transform:scale(0.7);
+}
+.scale06{
+    transform:scale(0.6);
+}
+.scale05{
+    transform:scale(0.5);
+}
+.scale04{
+    transform:scale(0.4);
+}
+.scale03{
+    transform:scale(0.3);
+}

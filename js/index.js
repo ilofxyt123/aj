@@ -513,7 +513,93 @@
 
         this.picUrl = "images/";//图片路径
 
-        this.ImageList = [];
+        this.ImageList = [
+            this.picUrl+"3d_img_1.png",
+            this.picUrl+"3d_img_2.png",
+            this.picUrl+"3d_img_2_1.png",
+            this.picUrl+"3d_img_2_2.png",
+            this.picUrl+"3d_img_3.png",
+            this.picUrl+"3d_img_4.png",
+            this.picUrl+"3d_img_4_1.png",
+            this.picUrl+"3d_img_5.png",
+            this.picUrl+"3d_img_5_1.png",
+            this.picUrl+"3d_img_6.png",
+            this.picUrl+"3d_img_6_1.png",
+            this.picUrl+"3d_img_7.png",
+            this.picUrl+"3d_img_7_1.png",
+            this.picUrl+"3d_img_8.png",
+            this.picUrl+"3d_img_8_1.png",
+            this.picUrl+"3d_img_9.png",
+            this.picUrl+"3d_img_9_1.png",
+            this.picUrl+"3d_img_10.png",
+            this.picUrl+"3d_img_10_1.png",
+            this.picUrl+"3d_img_11.png",
+            this.picUrl+"3d_img_11_1.png",
+            this.picUrl+"3d_img_12.png",
+            this.picUrl+"3d_img_12_1.png",
+            this.picUrl+"3d_img_13.png",
+            this.picUrl+"3d_img_13_1.png",
+            this.picUrl+"3d_img_14.png",
+            this.picUrl+"3d_img_14_1.png",
+            this.picUrl+"3d_img_14_2.png",
+            this.picUrl+"3d_img_15.png",
+            this.picUrl+"3d_img_15_1.png",
+            this.picUrl+"3d_img_15_2.png",
+            this.picUrl+"3d_img_15_3.png",
+            this.picUrl+"3d_img_15_4.png",
+            this.picUrl+"3d_img_16.png",
+            this.picUrl+"3d_img_16_1.png",
+            this.picUrl+"3d_img_16_2.png",
+            this.picUrl+"3d_img_17.png",
+            this.picUrl+"3d_img_17_1.png",
+            this.picUrl+"3d_img_17_2.png",
+            this.picUrl+"3d_img_18.png",
+            this.picUrl+"3d_img_18_1.png",
+            this.picUrl+"3d_img_18_2.png",
+            this.picUrl+"3d_img_19.png",
+            this.picUrl+"3d_img_19_1.png",
+            this.picUrl+"3d_img_20.png",
+            this.picUrl+"3d_img_20_1.png",
+            this.picUrl+"3d_img_21.png",
+            this.picUrl+"3d_img_21_1.png",
+            this.picUrl+"3d_img_22.png",
+            this.picUrl+"3d_img_22_1.png",
+            this.picUrl+"black.png",
+            this.picUrl+"img_d.png",
+            this.picUrl+"load_img_1.png",
+            this.picUrl+"load_img_2.png",
+            this.picUrl+"load_img_3.png",
+            this.picUrl+"load_img_4.png",
+            this.picUrl+"load_img_5.png",
+            this.picUrl+"load_img_6.png",
+            this.picUrl+"logo.png",
+            this.picUrl+"p1_img_1.png",
+            this.picUrl+"p1_img_2.png",
+            this.picUrl+"p1_img_3.png",
+            this.picUrl+"p1_img_4.png",
+            this.picUrl+"p1_img_5.png",
+            this.picUrl+"p2_img_0.png",
+            this.picUrl+"p2_img_1.png",
+            this.picUrl+"p2_img_2.png",
+            this.picUrl+"p2_img_3.png",
+            this.picUrl+"p2_img_4.png",
+            this.picUrl+"p3_img_0.png",
+            this.picUrl+"p3_img_1.png",
+            this.picUrl+"p3_img_2.png",
+            this.picUrl+"p3_img_3.png",
+            this.picUrl+"p3_img_4.png",
+            this.picUrl+"p4_img_1.png",
+            this.picUrl+"p4_img_2.png",
+            this.picUrl+"p4_img_3.png",
+            this.picUrl+"p4_img_4.png",
+            this.picUrl+"p4_img_5.png",
+            this.picUrl+"p4_img_6.png",
+            this.picUrl+"p5_img_1.png",
+            this.picUrl+"phone.png",
+            this.picUrl+"point.png",
+            this.picUrl+"poster.jpg",
+            this.picUrl+"weile.png"
+        ];
 
         this.gameData = {
             success:false,
@@ -953,40 +1039,55 @@
             console.log("init");
         },
         start:function(){
-
+            Utils.preloadImage(this.ImageList,this.startCallback.bind(this))
+        },
+        startCallback:function(){
+            console.log("图片加载完");
+            this.loadVr();
         },
         test:function(){
             // this.print(this.Str[0],$(".op-printer"),100,function(){
             //     $(".P_test").fo(800);
             //     $(".P_vr").fi(800);
             // })
-            this.krpano = document.getElementById("krpanoSWFObject");
+
+            // this.krpano = document.getElementById("krpanoSWFObject");
             console.log("我是test");
-            var _self = this;
-            setTimeout(function(){
-                _self.p1leave();
-                _self.pvr();
-            },1000);
+            // var _self = this;
+            // setTimeout(function(){
+            //     _self.p1leave();
+            //     _self.pvr();
+            // },1000);
+        },
+        loadingleave:function(){},
+        p1:function(){
+            $(".P1").fi();
         },
         p1leave:function(){
-            $(".P_bg").fo();
+            $(".P1").fo();
+        },
+        p2:function(){
+            $(".P2").fi();
+        },
+        p2leave:function(){
+            $(".P2").fo();
+        },
+        p3:function(){
+            $(".P3").fi();
+        },
+        p3leave:function(){
+            $(".P3").fo();
         },
         loadVr:function(){
             embedpano({swf:"tour.swf", xml:"tour.xml?d", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
+            // this.krpano = document.getElementById("krpanoSWFObject");
             this.banTouchVr();
             var _self = this;
-            $(".P_vr").fi(function(){
-                // setTimeout(function(){
-                //     $(".toolBar").addClass("ani-bar");
-                // },1000)
-            });
+            $(".P_vr").fi();
             this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
             this.rotateView();
-        },
-        enterVR:function(){
-
         },
         //////////////流程类函数/////////////
 
@@ -1018,6 +1119,13 @@
                 });
             });
             /////////P_layer//////////
+
+            /////////P3//////////
+            $(".p3-btn").on("touchend",function(){
+                _self.p3leave();
+                _self.pvr();
+            });
+            /////////P3//////////
 
             /////////blue-mask//////////
             $(".mask-btn1").on("touchend",function(){
@@ -1067,7 +1175,9 @@
 
 
 
-
+            $(".P_share").on("touchend",function(){
+                $(this).fo();
+            });
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
                 {
@@ -1092,7 +1202,7 @@
 }(window));
 $(function(){
     window.main = new Main();
-    main.loadVr();
+    // main.loadVr();
     main.test();
     main.addEvent();
 });

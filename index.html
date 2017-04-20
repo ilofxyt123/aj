@@ -40,7 +40,121 @@
 </head>
 <body>
 
-<div class="container P_bg bk-black"></div>
+<div class="top">
+    <img src="images/logo.png" class="logo">
+</div>
+<style>
+    .top{width:100%;position: absolute;top:16px;height:30px;z-index:99;}
+        .logo{left:30px;top:0;}
+</style>
+
+<div class="container P_bg bk-black">
+    <div class="bgBlock bk-theme"></div>
+    <img src="images/p1_img_1.png" class="cloud cloudR">
+    <img src="images/p1_img_2.png" class="cloud cloudL">
+
+
+
+</div>
+<div class="container P_loading none">
+    <img src="images/load_img_1.png" class="load-title">
+    <div class="loaderBox">
+        <div class="three-milk">
+            <img src="images/load_img_5.png" class="small-circle">
+            <img src="images/load_img_5.png" class="small-circle">
+            <img src="images/load_img_5.png" class="small-circle">
+            <img src="images/load_img_6.png" class="milk-down ani-milkDown">
+        </div>
+        <div class="loader-circle ani-lang">
+            <!--<img src="images/" class="bubble">-->
+            <!--<img src="images/load_img_4.png" class="lang ani-lang">-->
+        </div>
+        <span class="num">-100%-</span>
+        <img src="images/load_img_2.png" class="load-txt">
+    </div>
+    <img src="images/logo.png" class="load-logo">
+</div>
+<style>
+    .P_bg{}
+        .cloudR{left:557px;top:33px;}
+        .cloudL{right:592px;top:170px;}
+        .bgBlock{width:100%;height:100%;position: absolute;}
+    .P_loading{}
+        .load-title{top:34px;left:50%;margin-left:-133px;}
+        .loaderBox{width:222px;height:574px;top:210px;position: absolute;left:50%;margin-left:-111px;}
+            .three-milk{width:40px;margin:0 auto;position: relative;z-index:1;}
+                .small-circle{width:16px;position: static;margin-bottom:5px;margin-left:auto;margin-right:auto;}
+                .milk-down{margin:0 auto;}
+            .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("images/load_img_4.png");-webkit-mask-image:url("images/load_img_3.png");background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:100px;background-repeat: no-repeat;}
+                .lang{left:0;transform:translateX(0px);}
+            .num{width:90px;position: absolute;text-align: center;height:30px;line-height:30px;left:50%;margin-left:-45px;top:355px;color:white;}
+            .load-txt{bottom:0;left:50%;margin-left:-10px;}
+        .load-logo{top:900px;left:50%;margin-left:-58px;}
+</style>
+
+<div class="container P1 none">
+    <img src="images/p1_img_3.png" class="p1-man">
+    <div class="p1-bg">
+        <img src="images/p1_img_5.png">
+        <div class="p1-pop">
+            <img src="images/p1_img_4.png" class="pop1">
+            <img src="images/p1_img_4.png" class="pop2">
+            <img src="images/p1_img_4.png" class="pop3">
+        </div>
+    </div>
+</div>
+<style>
+    .P1{}
+        .p1-man{left:205px;top:90px;}
+        .p1-bg{width:640px;height:726px;left:0;top:280px;position: absolute;}
+        .p1-pop{width:66px;height:110px;left:438px;top:208px;position:absolute;}
+            .pop1{width:18px;left:0;bottom:0;}
+            .pop2{left:15px;top:50px;width:28px;}
+            .pop3{right:0;top:0;}
+</style>
+
+<div class="container P2 none">
+    <img src="images/p2_img_1.png" class="p2-title1"><!--产品多样化-->
+    <img src="images/p2_img_2.png" class="p2-title2"><!--不断创新-->
+    <img src="images/p2_img_3.png" class="p2-title3"><!--开源节流-->
+    <div class="p2-bg">
+        <img src="images/p2_img_0.png" class="p2-bg-pic">
+        <div class="printBox">
+            <p class="op-printer">这里面有好几个字</p>
+            <img src="images/p2_img_4.png" class="baidu">
+        </div>
+    </div>
+</div>
+<style>
+    .P2{}
+        .p2-title1{left:204px;top:70px;}
+        .p2-title2{left:66px;top:205px;}
+        .p2-title3{left:374px;top:205px;}
+        .p2-bg{left:0;top:334px;width:640px;height:668px;position: absolute;}
+            .p2-bg-pic{left:0;top:0;z-index:1;}
+            .printBox{width:310px;height:18px;position: absolute;left:170px;top:115px;z-index:2;}
+                .op-printer{width:258px;height:18px;line-height:18px;position: absolute;left:0;top:0;color:black;font-size:16px;}
+                .baidu{position: absolute;right:0;top:0;}
+</style>
+
+<div class="container P3 none">
+    <img src="images/p3_img_0.png" class="p3-title">
+    <img src="images/p3_img_1.png" class="bg-icon">
+    <img src="images/p3_img_2.png" class="p3-bg2">
+    <img src="images/p3_img_3.png" class="p3-btn-ui">
+    <img src="images/p3_img_4.png" class="bg-mountain">
+    <img src="images/p1_img_1.png" class="bg-cloud">
+    <div class="p3-btn"></div>
+</div>
+<style>
+    .P3{}
+        .p3-title{top:117px;left:206px;}
+        .p3-bg2{top:220px;left:84px;z-index:2;}
+        .p3-btn-ui{top:720px;left:150px;}
+        .bg-icon{top:220px;left:84px;z-index:1;}
+        .bg-mountain{top:760px;left:50px;z-index:-1;}
+        .p3-btn{top:720px;left:150px;width:340px;height:70px;position: absolute;z-index:3;}
+</style>
 <div class="container P_vr none">
     <div id="pano" style="width:100%;height:100%;">
         <!--<script>-->
@@ -174,8 +288,6 @@
             <p class="like-cell addTxt">厨师区域</p>
         </div>
     </div><!--厨师区-->
-
-
 </div>
 <style>
     .P_layer{}
@@ -184,16 +296,59 @@
             ul.scroller{width:100%;height:100%;}
                 li.scroll-item{width:100%;height:100%;}
                 .like-table{display:table;}
-                p.like-cell{display:table-cell;vertical-align: middle;text-align: center;}
+                p.like-cell{display:table-cell;vertical-align:middle;text-align:center;}
 </style>
 
 <div class="container P_banTouch none"></div>
 <style>
     .P_banTouch{z-index:20;}
 </style>
-<div class="container P_test none">
-    <p class="op-printer"></p>
+
+<div class="container P_result">
+    <img src="images/p4_img_1.png" class="result-txt1">
+    <img src="images/p3_img_1.png" class="result-bg1">
+    <img src="images/p3_img_4.png" class="result-bg2">
+    <img src="images/p1_img_1.png" class="bg-cloud">
+
+    <img src="images/p4_img_2.png" class="result-prize">
+    <div class="result-txtBox">
+        <img src="images/p4_img_3.png">
+        <span class="percent">30</span>
+    </div>
+
+    <img src="images/p4_img_4.png" class="result-ui-btn1">
+    <div class="result-btn1"></div>
+
+    <img src="images/p4_img_5.png" class="result-btn2">
+
+    <img src="images/p4_img_6.png" class="e-code">
+
 </div>
+<style>
+    .P_result{}
+        .result-txt1{top:96px;left:50%;margin-left:-204px;z-index:2;}
+        .result-bg1{top:30px;left:55px;z-index:1;}
+        .result-bg2{top:760px;left:50px;z-index:1;}
+        .bg-cloud{width:60px;left:55px;top:820px;}
+
+        .result-prize{left:50%;margin-left:-167px;top:305px;}
+        .result-txtBox{width:367px;height:60px;top:522px;left:50%;margin-left:-183px;position: absolute;}
+            .percent{position: absolute;height:24px;line-height:24px;left:224px;width:60px;text-align: center;color:white;top:0;}
+        .result-ui-btn1{left:190px;top:630px;}
+        .result-btn1{width:260px;height:66px;top:630px;left:190px;z-index:10;position: absolute;}
+        .result-btn2{top:730px;left:50%;margin-left:-73px;}
+        .e-code{top:790px;left:50%;margin-left:-150px;}
+
+</style>
+
+<div class="container P_share">
+    <img src="images/p5_img_1.png" class="share-pic">
+</div>
+<style>
+    .P_share{background-color: rgba(0,0,0,0.8);z-index:100;}
+        .share-pic{top:20px;right:45px;}
+</style>
+
 <div class="container hp none">
     <div class="hp_box">
         <img src="images/phone.png" class="phone">
