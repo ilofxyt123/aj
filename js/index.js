@@ -353,7 +353,8 @@
                 (function(img, src) {
                     img.onload = function() {
                         haveLoaded+=1;
-                        var num = Math.ceil(haveLoaded / ImageURL.length* 100);
+                        var percent = haveLoaded / ImageURL.length,
+                             num = Math.ceil(percent * 100);
                         if(rd){
                             $(".num").html("- "+num + "% -");
                         }
@@ -468,6 +469,10 @@
     var Main = function(){
         this.clockSwitch;//Interval或Timeout句柄
 
+        this.loadingOver = false;
+        this.$milkLoader = $(".loader-circle");
+        this.$num = $(".num");
+
         this.pages = ["",""];//页面跳转管理
 
         this.touch ={//touch数据
@@ -517,7 +522,6 @@
             this.picUrl+"3d_img_1.png",
             this.picUrl+"3d_img_2.png",
             this.picUrl+"3d_img_2_1.png",
-            this.picUrl+"3d_img_2_2.png",
             this.picUrl+"3d_img_3.png",
             this.picUrl+"3d_img_4.png",
             this.picUrl+"3d_img_4_1.png",
@@ -597,7 +601,7 @@
             this.picUrl+"p5_img_1.png",
             this.picUrl+"phone.png",
             this.picUrl+"point.png",
-            this.picUrl+"poster.jpg",
+            this.picUrl+"poster.png",
             this.picUrl+"weile.png"
         ];
 
@@ -689,7 +693,7 @@
             _self.clockSwitch = setInterval(function(){
                 _self.printer.$container[0].innerHTML +=_self.printer.printStr[_self.printer.now];
                 _self.printer.now+=1;
-                if(_self.printer.now == _self.printer.printLen-1){
+                if(_self.printer.now == _self.printer.printLen){
                     setTimeout(function(){
                         callback();
                     },500);
@@ -903,22 +907,36 @@
             switch(n){
                 case 1:
                     this.block1.success = true;
+                    _self.gameData.haveFind.push(_self.gameData.prize[0]);
                     $(".btn1 .default").addClass("none");
                     $(".btn1 .light").removeClass("none");
                     // $(".btn1 .default").fo();
                     break;
                 case 2:
                     this.block2.success = true;
+                    _self.gameData.haveFind.push(_self.gameData.prize[1]);
                     $(".btn2 .default").addClass("none");
                     $(".btn2 .light").removeClass("none");
                     break;
                 case 3:
                     this.block3.success = true;
+                    _self.gameData.haveFind.push(_self.gameData.prize[2]);
                     $(".btn3 .default").addClass("none");
                     $(".btn3 .light").removeClass("none");
                     break;
             }
         },
+        account:function(){
+            var l = this.gameData.haveFind.length;
+            if(l==3){
+                console.log("所有图鉴收集完成，成功开启胜利之门");
+                this.krpano.call("set(hotspot[tip_red].visible,false)");
+                this.krpano.call("set(hotspot[tip_blue].visible,true)");
+            }
+            else{
+                console.log("还差"+(3-l)+"个图鉴即可打开胜利之门");
+            }
+        },//检测是否已经收集全所有
         //////////////辅助类函数/////////////
 
         //////////////kp对外/////////////
@@ -1032,6 +1050,10 @@
             }
 
         },//普通热点
+        exit:function(){
+            this.pvrleave();
+            this.presult();
+        },
         //////////////kp对外/////////////
 
         //////////////流程类函数/////////////
@@ -1039,29 +1061,72 @@
             console.log("init");
         },
         start:function(){
-            Utils.preloadImage(this.ImageList,this.startCallback.bind(this))
+            Utils.preloadImage(this.ImageList,function(){this.loadingOver = true;}.bind(this));
+            this.milkLoader()
+        },
+        milkLoader:function(){
+            var now=0,
+                total = 99,
+                add = 0,
+                percent,
+                _self = this;
+            var clock = setInterval(function(){
+                add = 3*Math.random();
+                if(now+add<total){
+                    now+=add;
+                }
+                else{
+                    now = total;
+                    if(_self.loadingOver){
+                        now = 100;
+                        _self.$num.html("- 100% -");
+                        _self.startCallback();
+                        $(".milk-down").removeClass("ani-milkDown").fo();
+                        clearInterval(clock);
+                    }
+                }
+                percent = now/total;
+                _self.$milkLoader.css("backgroundPositionY",(200-(250*percent))+"px")
+                _self.$num.html("- "+Math.ceil(now) + "% -");
+            },100);
         },
         startCallback:function(){
-            console.log("图片加载完");
-            this.loadVr();
+            var _self = this;
+            setTimeout(function(){
+                _self.p1();
+                _self.top();
+                _self.loadingleave();
+            },1000)
+
         },
         test:function(){
             // this.print(this.Str[0],$(".op-printer"),100,function(){
             //     $(".P_test").fo(800);
             //     $(".P_vr").fi(800);
             // })
-
-            // this.krpano = document.getElementById("krpanoSWFObject");
-            console.log("我是test");
-            // var _self = this;
-            // setTimeout(function(){
-            //     _self.p1leave();
-            //     _self.pvr();
-            // },1000);
+            this.loadVr();
+            var _self = this;
+            setTimeout(function(){
+                _self.krpano = document.getElementById("krpanoSWFObject");
+                _self.p1leave();
+                _self.pvr();
+            },1000);
         },
-        loadingleave:function(){},
+        loadingleave:function(){
+            $(".P_loading").fo();
+        },
+        top:function(){
+            $(".top").fi();
+        },
+        topleave:function(){
+            $(".top").fo();
+        },
         p1:function(){
-            $(".P1").fi();
+            var _self = this;
+            $(".cloud").removeClass("none");
+            $(".P1").fi(function(){
+                // _self.loadVr();
+            });
         },
         p1leave:function(){
             $(".P1").fo();
@@ -1079,15 +1144,24 @@
             $(".P3").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?d", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?1", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
-            // this.krpano = document.getElementById("krpanoSWFObject");
+            this.krpano = document.getElementById("krpanoSWFObject");
             this.banTouchVr();
             var _self = this;
             $(".P_vr").fi();
             this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
             this.rotateView();
+        },
+        pvrleave:function(){
+            $(".P_vr").fo();
+        },
+        presult:function(){
+            $(".P_result").fi();
+        },
+        pshare:function(){
+            $(".P_share").fi();
         },
         //////////////流程类函数/////////////
 
@@ -1109,21 +1183,57 @@
             document.ontouchmove = function(e){e.preventDefault();};
 
             /////////P_layer//////////
-            $(".ui-txtBox").on("touchend",function () {
+            $(".P_layer").on("touchend",function () {
                 $(this).fo(function(){
-                    $(".P_layer").addClass("none");
-                    switch(_self.router){
-                        case "1":
-                            break;
-                    }
+                    _self.account();
+                    $(".ui-txtBox").addClass("none");
                 });
             });
             /////////P_layer//////////
+
+            /////////P1//////////
+            $(".p1-man").on("webkitAnimationEnd",function(){
+                setTimeout(function(){
+                    _self.p1leave();
+                    _self.p2();
+                },1000);
+                _self.loadVr();
+                $(this).off("webkitAnimationEnd");
+            });
+            /////////P1/////////
+
+            /////////P2/////////
+            var EndHandler1 = function(){
+                setTimeout(function(){
+                    console.log(this);
+                    $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig ");
+                    setTimeout(function(){
+                        $(".p2-title1").addClass("ani-p2-t1");
+                        $(".p2-title2").addClass("ani-p2-t2");
+                        $(".p2-title3").addClass("ani-p2-t3");
+                    },1000);
+                    $(this).off("webkitAnimationEnd",EndHandler1).on("webkitAnimationEnd",EndHandler2)
+                },1000);
+            };
+            var EndHandler2 = function(){
+                var str = "如何解决";
+                _self.print(str,$(".op-printer"),150,function(){
+                    $(".baidu").addClass("ani-baidu");
+                });
+                $(this).off("webkitAnimationEnd",EndHandler2);
+            };
+            $(".p2-title3").on("webkitAnimationEnd",EndHandler1);
+            $(".baidu").on("webkitAnimationEnd",function(){
+                _self.p2leave();
+                _self.p3();
+            });
+            /////////P2/////////
 
             /////////P3//////////
             $(".p3-btn").on("touchend",function(){
                 _self.p3leave();
                 _self.pvr();
+                _self.topleave();
             });
             /////////P3//////////
 
@@ -1134,6 +1244,7 @@
                     _self.getKey(1);
                 }
                 $(".blue-mask").fo();
+                _self.account();
             });
             $(".mask-btn2").on("touchend",function(){
                 console.log("答案不正确，请继续选择");
@@ -1148,14 +1259,18 @@
 
             $(_self.V.obj).on({
                 pause:function(){
+                    _self.V.isPlay = false;
+                    $(".play-btn").fi();
                     alert("视频暂停");
                 },
                 ended:function(){
+                    _self.V.isPlay = false;
+                    $(".play-btn").fi();
                     alert("视频end了")
                 }
             });
             $(".videoBox").on("touchend",function(){
-                if(ios){
+                if(ios||!ios){
                     if(_self.V.isPlay){
                         _self.V.obj.pause();
                         _self.V.isPlay = false;
@@ -1177,6 +1292,9 @@
 
             $(".P_share").on("touchend",function(){
                 $(this).fo();
+            });
+            $(".result-btn1").on("touchend",function(){
+                _self.pshare();
             });
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
@@ -1202,8 +1320,8 @@
 }(window));
 $(function(){
     window.main = new Main();
-    // main.loadVr();
-    main.test();
+    // main.test();
+    main.start();
     main.addEvent();
 });
 

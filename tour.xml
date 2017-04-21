@@ -104,15 +104,22 @@
 
 		<!-- place your scene hotspots here -->
 		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="-11.909" atv="-7.238"  onclick="iCon('s')" /><!-- 迎宾区高亮icon -->
-		<hotspot name="tip_red"  scale="0.5"  url="images/3d_img_20_1.png" ath="38.775" atv="8.934"  onclick=""/>
-		<hotspot name="tip_blue"  scale="0.5"  url="images/3d_img_20.png" ath="38.775" atv="8.934"  onclick="" alpha="0"/>
+		<hotspot name="tip_red"  scale="0.5"  url="images/3d_img_20_1.png" ath="38.775" atv="8.934"  onclick="" visible="true"/><!--未找到所有图鉴显示为红色-->
+		<hotspot name="tip_blue"  scale="0.5"  url="images/3d_img_20.png" ath="38.775" atv="8.934"  onclick="exit()" visible="false"/><!--点击退出场景-->
 
-		<hotspot name="White_1"  scale="0.5"  url="images/point.png" ath="57.396" atv="-5.771"  onclick="hotspotClick('w1')"/><!--白点 -->
-		<hotspot name="White_2"  scale="0.5"  url="images/point.png" ath="100.428" atv="1.335"  onclick="hotspotClick('w2')"/>
-		<hotspot name="White_3"  scale="0.5"  url="images/point.png" ath="120.417" atv="12.642"  onclick="hotspotClick('w3')"/>
-		<hotspot name="White_4"  scale="0.5"  url="images/point.png" ath="158.436" atv="13.099"  onclick="hotspotClick('w4')"/>
-		<hotspot name="White_5"  scale="0.5"  url="images/point.png" ath="-102.383" atv="17.022"  onclick="hotspotClick('w5')"/>
-		<hotspot name="White_6"  scale="0.5"  url="images/point.png" ath="-56.092" atv="-1.180"  onclick="hotspotClick('w6')"/>
+		<!--<hotspot name="White_1"  scale="1"  url="images/point.png" ath="57.396" atv="-5.771"  onclick="hotspotClick('w1')"/>&lt;!&ndash;白点 &ndash;&gt;-->
+		<!--<hotspot name="White_2"  scale="1"  url="images/point.png" ath="100.428" atv="1.335"  onclick="hotspotClick('w2')"/>-->
+		<!--<hotspot name="White_3"  scale="1"  url="images/point.png" ath="120.417" atv="12.642"  onclick="hotspotClick('w3')"/>-->
+		<!--<hotspot name="White_4"  scale="1"  url="images/point.png" ath="158.436" atv="13.099"  onclick="hotspotClick('w4')"/>-->
+		<!--<hotspot name="White_5"  scale="1"  url="images/point.png" ath="-102.383" atv="17.022"  onclick="hotspotClick('w5')"/>-->
+		<!--<hotspot name="White_6"  scale="1"  url="images/point.png" ath="-56.092" atv="-1.180"  onclick="hotspotClick('w6')"/>-->
+
+		<hotspot name="White_1"  scale="1"  url="images/point2.png" ath="57.396" atv="-5.771"  onclick="hotspotClick('w1')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/><!--白点 -->
+		<hotspot name="White_2"  scale="1"  url="images/point2.png" ath="100.428" atv="1.335"  onclick="hotspotClick('w2')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<hotspot name="White_3"  scale="1"  url="images/point2.png" ath="120.417" atv="12.642"  onclick="hotspotClick('w3')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<hotspot name="White_4"  scale="1"  url="images/point2.png" ath="158.436" atv="13.099"  onclick="hotspotClick('w4')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<hotspot name="White_5"  scale="1"  url="images/point2.png" ath="-102.383" atv="17.022"  onclick="hotspotClick('w5')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<hotspot name="White_6"  scale="1"  url="images/point2.png" ath="-56.092" atv="-1.180"  onclick="hotspotClick('w6')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
 
 		<hotspot name="block1_red"  scale="0.5"  url="images/3d_img_2_1.png" ath="133.793" atv="10.981"  onclick="iCon('1')"/><!-- 视频区高亮icon -->
 		<hotspot name="block1_video"  scale="0.3"  url="images/black.png" ath="133.185" atv="-1.848"  onclick="hotspotClick('11')"/>
@@ -134,6 +141,8 @@
 		<hotspot name="block3_3"  scale="0.5"  url="images/3d_img_14.png" ath="-42.130" atv="13.309"  onclick="hotspotClick('33')"/>
 		<hotspot name="block3_4_l"  scale="0.5"  url="images/3d_img_13_1.png" ath="-35.986" atv="12.604"  onclick=""/>
 		<hotspot name="block3_4"  scale="0.5"  url="images/3d_img_13.png" ath="-35.986" atv="12.604"  onclick="hotspotClick('34')"/>
+		<hotspot name="block3_5_l"  scale="0.5"  url="images/3d_img_13_1.png" ath="-35.986" atv="12.604"  onclick=""/>
+		<hotspot name="block3_5"  scale="0.5"  url="images/img_d.png" ath="-35.986" atv="12.604"  onclick="hotspotClick('34')"/>
 
 		<hotspot name="block4_1_l"  scale="1"  url="images/3d_img_21.png" ath="-88.199" atv="9.719"  onclick="" />
 		<hotspot name="block4_1"  scale="1"  url="images/3d_img_21_1.png" ath="-88.199" atv="9.719"  onclick="hotspotClick('41')"/>
@@ -153,6 +162,9 @@
 	</action>
 	<action name="point">
 		js(main.point(%1));
+	</action>
+	<action name="exit">
+		js(main.exit());
 	</action>
 
 	<action name="enterVideo">

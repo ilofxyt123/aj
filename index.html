@@ -40,7 +40,7 @@
 </head>
 <body>
 
-<div class="top">
+<div class="top none">
     <img src="images/logo.png" class="logo">
 </div>
 <style>
@@ -50,13 +50,13 @@
 
 <div class="container P_bg bk-black">
     <div class="bgBlock bk-theme"></div>
-    <img src="images/p1_img_1.png" class="cloud cloudR">
-    <img src="images/p1_img_2.png" class="cloud cloudL">
+    <img src="images/p1_img_1.png" class="cloud cloudR animate none ani-cloud">
+    <img src="images/p1_img_2.png" class="cloud cloudL animate none ani-cloud alternate">
 
 
 
 </div>
-<div class="container P_loading none">
+<div class="container P_loading">
     <img src="images/load_img_1.png" class="load-title">
     <div class="loaderBox">
         <div class="three-milk">
@@ -66,10 +66,13 @@
             <img src="images/load_img_6.png" class="milk-down ani-milkDown">
         </div>
         <div class="loader-circle ani-lang">
-            <!--<img src="images/" class="bubble">-->
+            <img src="images/load_img_5.png" class="bubble1 ani-bubble opacity ">
+            <img src="images/load_img_5.png" class="bubble2 ani-bubble opacity delay05">
+            <img src="images/load_img_5.png" class="bubble3 ani-bubble opacity delay10">
+            <img src="images/load_img_5.png" class="bubble4 ani-bubble opacity delay14">
             <!--<img src="images/load_img_4.png" class="lang ani-lang">-->
         </div>
-        <span class="num">-100%-</span>
+        <span class="num"></span>
         <img src="images/load_img_2.png" class="load-txt">
     </div>
     <img src="images/logo.png" class="load-logo">
@@ -85,21 +88,24 @@
             .three-milk{width:40px;margin:0 auto;position: relative;z-index:1;}
                 .small-circle{width:16px;position: static;margin-bottom:5px;margin-left:auto;margin-right:auto;}
                 .milk-down{margin:0 auto;}
-            .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("images/load_img_4.png");-webkit-mask-image:url("images/load_img_3.png");background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:100px;background-repeat: no-repeat;}
-                .lang{left:0;transform:translateX(0px);}
-            .num{width:90px;position: absolute;text-align: center;height:30px;line-height:30px;left:50%;margin-left:-45px;top:355px;color:white;}
+            .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("images/load_img_4.png?2");-webkit-mask-image:url("images/load_img_3.png");background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:200px;background-repeat: no-repeat;transition:background-position-y 0.3s linear;}
+                .bubble1{left:-8px;top:52px;width:17px;}
+                .bubble2{left:133px;top:-30px;width:28px;}
+                .bubble3{left:42px;top:82px;width:39px;}
+                .bubble4{left:175px;top:30px;width:22px;}
+            .num{width:100px;position: absolute;text-align: center;height:30px;line-height:30px;left:50%;margin-left:-50px;top:355px;color:white;}
             .load-txt{bottom:0;left:50%;margin-left:-10px;}
         .load-logo{top:900px;left:50%;margin-left:-58px;}
 </style>
 
 <div class="container P1 none">
-    <img src="images/p1_img_3.png" class="p1-man">
+    <img src="images/p1_img_3.png" class="p1-man opacity ani-toBig delay09">
     <div class="p1-bg">
         <img src="images/p1_img_5.png">
         <div class="p1-pop">
-            <img src="images/p1_img_4.png" class="pop1">
-            <img src="images/p1_img_4.png" class="pop2">
-            <img src="images/p1_img_4.png" class="pop3">
+            <img src="images/p1_img_4.png" class="pop1 opacity ani-pop delay02">
+            <img src="images/p1_img_4.png" class="pop2 opacity ani-pop delay04">
+            <img src="images/p1_img_4.png" class="pop3 opacity ani-pop delay06">
         </div>
     </div>
 </div>
@@ -114,22 +120,22 @@
 </style>
 
 <div class="container P2 none">
-    <img src="images/p2_img_1.png" class="p2-title1"><!--产品多样化-->
-    <img src="images/p2_img_2.png" class="p2-title2"><!--不断创新-->
-    <img src="images/p2_img_3.png" class="p2-title3"><!--开源节流-->
+    <img src="images/p2_img_1.png" class="p2-title p2-title1 ani-toBig opacity delay02"><!--产品多样化-->
+    <img src="images/p2_img_2.png" class="p2-title p2-title2 ani-toBig opacity delay05"><!--不断创新-->
+    <img src="images/p2_img_3.png" class="p2-title p2-title3 ani-toBig opacity delay08"><!--开源节流-->
     <div class="p2-bg">
         <img src="images/p2_img_0.png" class="p2-bg-pic">
         <div class="printBox">
-            <p class="op-printer">这里面有好几个字</p>
+            <p class="op-printer"></p>
             <img src="images/p2_img_4.png" class="baidu">
         </div>
     </div>
 </div>
 <style>
     .P2{}
-        .p2-title1{left:204px;top:70px;}
-        .p2-title2{left:66px;top:205px;}
-        .p2-title3{left:374px;top:205px;}
+        .p2-title1{left:204px;top:70px;z-index:2;}
+        .p2-title2{left:66px;top:205px;z-index:2;}
+        .p2-title3{left:374px;top:205px;z-index:2;}
         .p2-bg{left:0;top:334px;width:640px;height:668px;position: absolute;}
             .p2-bg-pic{left:0;top:0;z-index:1;}
             .printBox{width:310px;height:18px;position: absolute;left:170px;top:115px;z-index:2;}
@@ -140,8 +146,8 @@
 <div class="container P3 none">
     <img src="images/p3_img_0.png" class="p3-title">
     <img src="images/p3_img_1.png" class="bg-icon">
-    <img src="images/p3_img_2.png" class="p3-bg2">
-    <img src="images/p3_img_3.png" class="p3-btn-ui">
+    <img src="images/p3_img_2.png" class="p3-bg2 opacity ani-toBig delay03">
+    <img src="images/p3_img_3.png" class="p3-btn-ui opacity ani-fadeIn delay08">
     <img src="images/p3_img_4.png" class="bg-mountain">
     <img src="images/p1_img_1.png" class="bg-cloud">
     <div class="p3-btn"></div>
@@ -217,7 +223,7 @@
     <div class="blue-mask none">
         <div class="maskxx none"></div>
         <div class="videoBox">
-            <video src="video/1.mp4?v51" id="video"  width="540" x-webkit-airplay="true" webkit-playsinline playsinline airplay="allow" x5-video-player-type="h5" class="iosPreload" poster="images/poster.jpg"></video>
+            <video src="video/video.mp4" id="video"  width="540" x-webkit-airplay="true" webkit-playsinline playsinline airplay="allow" x5-video-player-type="h5" class="iosPreload" poster="images/poster.png"></video>
             <img src="images/3d_img_15_1.png" class="play-btn">
         </div>
         <img src="images/3d_img_15_3.png" class="mask-btn1">
@@ -304,7 +310,7 @@
     .P_banTouch{z-index:20;}
 </style>
 
-<div class="container P_result">
+<div class="container P_result none">
     <img src="images/p4_img_1.png" class="result-txt1">
     <img src="images/p3_img_1.png" class="result-bg1">
     <img src="images/p3_img_4.png" class="result-bg2">
@@ -337,11 +343,11 @@
         .result-ui-btn1{left:190px;top:630px;}
         .result-btn1{width:260px;height:66px;top:630px;left:190px;z-index:10;position: absolute;}
         .result-btn2{top:730px;left:50%;margin-left:-73px;}
-        .e-code{top:790px;left:50%;margin-left:-150px;}
+        .e-code{top:790px;left:50%;margin-left:-150px;z-index:5;}
 
 </style>
 
-<div class="container P_share">
+<div class="container P_share none">
     <img src="images/p5_img_1.png" class="share-pic">
 </div>
 <style>
