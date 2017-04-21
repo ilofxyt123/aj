@@ -1,7 +1,9 @@
-*.pptx
+﻿*.pptx
 *.pdf
 *.png
 *.jpg
+*.mp4
+*.psd
 js/jquery-1.11.3.min.js
 js/tool.js
 js/browser.js
@@ -9,3 +11,5 @@ js/browser.js
 .idea/modules.xml
 .idea/workspace.xml
 .idea/安佳.iml
+*.tmp
+*.pptx
