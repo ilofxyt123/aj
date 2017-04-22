@@ -331,7 +331,7 @@
 
 
     <div class="result-input-box">
-        <input id="phone" class="input-phone">
+        <input id="phone" type="tel" class="input-phone" onkeyup="this.value=this.value.replace(/\D/g,'')">
     </div>
     <div class="result-submit"></div>
 
@@ -371,20 +371,20 @@
 <style>
     .P_over{}
         .over-txtBox{width:398px;height:66px;top:224px;left:50%;margin-left:-199px;position: absolute;}
-            .percent{position: absolute;height:24px;line-height:24px;left:255px;width:60px;text-align: center;color:white;top:0;}
+            .percent{position: absolute;height:24px;line-height:24px;left:225px;width:60px;text-align: center;color:white;top:0;}
         .ui-pk-btn{left:190px;top:340px;}
         .pk-btn{width:260px;height:70px;left:190px;top:340px;position: absolute;z-index:5;}
         .e-code{top:140px;left:0;z-index:1;}
-
-
 </style>
 
 <div class="container P_share none">
     <img src="images/p5_img_1.png" class="share-pic">
 </div>
+<!--<div class="container P_dreamer opacity ani-dreamer none"></div>-->
 <style>
     .P_share{background-color: rgba(0,0,0,0.8);z-index:100;}
         .share-pic{top:20px;right:45px;}
+    .P_dreamer{background-color:white;z-index:11;}
 </style>
 
 <div class="container hp none">

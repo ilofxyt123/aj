@@ -538,3 +538,31 @@
         opacity:0;
     }
 }
+
+@-webkit-keyframes ani-dreamer {
+    0%{
+        opacity:0;
+    }
+    50%{
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
+}
+@keyframes ani-dreamer {
+    0%{
+        opacity:0;
+    }
+    50%{
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
+}
+
+.ani-dreamer {
+    -webkit-animation:ani-dreamer 2s ease-in-out  1  forwards;
+    animation:ani-dreamer 2s ease-in-out 1 forwards;
+}

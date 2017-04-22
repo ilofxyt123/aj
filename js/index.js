@@ -591,7 +591,6 @@
             this.picUrl+"p3_img_3.png",
             this.picUrl+"p3_img_4.png",
             this.picUrl+"p4_img_1.png",
-            this.picUrl+"p4_img_2.png",
             this.picUrl+"p4_img_3.png",
             this.picUrl+"p4_img_4.png",
             this.picUrl+"p4_img_5.png",
@@ -1073,6 +1072,21 @@
 
         },//普通热点
         exit:function(){
+            var _self = this;
+            // var dreamer = $(".P_dreamer");
+            // Math.animation([130,0.5,0],
+            //     [100,2,1],
+            //     1000,
+            //     'Sine.easeIn',
+            //     function (value) {
+            //         _self.krpano.call("set(view[v2].fov,'"+value[0]+"');");
+            //         _self.krpano.call("set(hotspot[tip_blue].scale,'"+value[1]+"');");
+            //     },
+            //     function(){
+            //         $(".P_vr").addClass("none");
+            //         _self.presult();
+            //     }
+            // );
             this.pvrleave();
             this.presult();
         },
@@ -1180,7 +1194,9 @@
             $(".P_vr").fo();
         },
         presult:function(){
-            $(".P_result").fi();
+            $(".P_result").fi(function(){
+                $(".P_dreamer").addClass("none");
+            });
         },
         presultleave:function(){
             $(".P_result").fo();
@@ -1338,8 +1354,13 @@
                 _self.pshare();
             });
             $(".result-submit").on("touchend",function(){
+                var number = $("#phone").val();
+                if(!(/^1(3|4|5|7|8)\d{9}$/.test(number))){console.log("请输入正确的手机号!");return;};
                 _self.presultleave();
                 _self.pover();
+            });
+            $("#phone").on("input",function(){
+                _self.limitNum($(this)[0]);
             });
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
