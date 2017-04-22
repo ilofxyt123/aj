@@ -1,4 +1,4 @@
-﻿<krpano version="1.19" title="Virtual Tour">
+<krpano version="1.19" title="Virtual Tour">
 
 	<!--<include url="skin/vtourskin.xml" />-->
 
@@ -87,7 +87,7 @@
 	
 	<scene name="scene_2" title="2" onstart="" thumburl="panos/2.tiles/thumb.jpg" lat="" lng="" heading="">
 
-		<view hlookat="0" vlookat="0" fovtype="MFOV" fov="120"  fovmin="110" fovmax="130"  vlookatmin="0" vlookatmax="0"/>
+		<view hlookat="-12" vlookat="0" fovtype="MFOV" fov="130.000"  fovmin="130" fovmax="130"  vlookatmin="0" vlookatmax="0"/>
 
 		1
 		<!--<view name="v2" hlookat="0" vlookat="0" vlookatmax="45" vlookatmin="-45" fovtype="MFOV" fov="110" fovmin="90" fovmax="125" limitview="range" />-->
@@ -122,15 +122,17 @@
 		<hotspot name="White_6"  scale="1"  url="images/point2.png" ath="-56.092" atv="-1.180"  onclick="hotspotClick('w6')" imagewidth="34" imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
 
 		<hotspot name="block1_red"  scale="0.5"  url="images/3d_img_2_1.png" ath="133.793" atv="10.981"  onclick="iCon('1')"/><!-- 视频区高亮icon -->
-		<hotspot name="block1_video"  scale="0.3"  url="images/black.png" ath="133.185" atv="-1.848"  onclick="hotspotClick('11')"/>
+		<hotspot name="block1_video"  scale="0.25"  url="images/black.png" ath="133.185" atv="-1.848"  onclick="hotspotClick('11')"/>
 
 		<hotspot name="block2_red"  scale="0.5"  url="images/3d_img_2_1.png" ath="216.242" atv="26.217"  onclick="iCon('2')"/><!-- 糕点区高亮icon -->
-		<hotspot name="block2_1_l"  scale="0.8"  url="images/3d_img_18_1.png" ath="-164.105" atv="11.315"  onclick=""/>
-		<hotspot name="block2_1"  scale="0.8"  url="images/3d_img_18.png" ath="-164.105" atv="11.315"  onclick="hotspotClick('21')"/>
-		<hotspot name="block2_2_l"  scale="0.8"  url="images/3d_img_16_1.png" ath="-145.211" atv="10.338"  onclick="" />
-		<hotspot name="block2_2"  scale="0.8"  url="images/3d_img_16.png" ath="-145.211" atv="10.338"  onclick="hotspotClick('22')"/>
-		<hotspot name="block2_3_l"  scale="0.8"  url="images/3d_img_17_1.png" ath="-130.684" atv="9.040"  onclick="" />
-		<hotspot name="block2_3"  scale="0.8"  url="images/3d_img_17.png" ath="-130.684" atv="9.040"  onclick="hotspotClick('23')"/>
+		<hotspot name="block2_1_l"  scale="0.5"  url="images/3d_img_18_1.png" ath="-140.284" atv="9.544"  onclick=""/>
+		<hotspot name="block2_1"  scale="0.5"  url="images/3d_img_18.png" ath="-140.284" atv="9.544"  onclick="hotspotClick('21')"/>
+		<hotspot name="block2_2_l"  scale="0.5"  url="images/3d_img_16_1.png" ath="-164.472" atv="11.744"  onclick="" />
+		<hotspot name="block2_2"  scale="0.5"  url="images/3d_img_16.png" ath="-164.472" atv="11.744"  onclick="hotspotClick('22')"/>
+		<hotspot name="block2_3_l"  scale="0.5"  url="images/3d_img_17_1.png" ath="-152.657" atv="10.803"  onclick="" />
+		<hotspot name="block2_3"  scale="0.5"  url="images/3d_img_17.png" ath="-152.657" atv="10.803"  onclick="hotspotClick('23')"/>
+		<hotspot name="block2_4_l"  scale="0.5"  url="images/3d_img_18_3.png" ath="-130.186" atv="8.614"  onclick="" />
+		<hotspot name="block2_4"  scale="0.5"  url="images/3d_img_18_2.png" ath="-130.186" atv="8.614"  onclick="hotspotClick('24')"/>
 
 		<hotspot name="block3_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="314.177" atv="-13.265"  onclick="iCon('3')"/><!-- 厨师区高亮icon -->
 		<hotspot name="block3_1_l"  scale="0.5"  url="images/3d_img_12_1.png" ath="-58.977" atv="13.141"  onclick="" />
@@ -141,13 +143,12 @@
 		<hotspot name="block3_3"  scale="0.5"  url="images/3d_img_14.png" ath="-42.130" atv="13.309"  onclick="hotspotClick('33')"/>
 		<hotspot name="block3_4_l"  scale="0.5"  url="images/3d_img_13_1.png" ath="-35.986" atv="12.604"  onclick=""/>
 		<hotspot name="block3_4"  scale="0.5"  url="images/3d_img_13.png" ath="-35.986" atv="12.604"  onclick="hotspotClick('34')"/>
-		<hotspot name="block3_5_l"  scale="0.5"  url="images/3d_img_13_1.png" ath="-35.986" atv="12.604"  onclick=""/>
-		<hotspot name="block3_5"  scale="0.5"  url="images/img_d.png" ath="-35.986" atv="12.604"  onclick="hotspotClick('34')"/>
+		<hotspot name="block3_5"  scale="0.8"  url="images/img_d.png" ath="-36.451" atv="5.868"  onclick="hotspotClick('35')"/>
 
-		<hotspot name="block4_1_l"  scale="1"  url="images/3d_img_21.png" ath="-88.199" atv="9.719"  onclick="" />
-		<hotspot name="block4_1"  scale="1"  url="images/3d_img_21_1.png" ath="-88.199" atv="9.719"  onclick="hotspotClick('41')"/>
-		<hotspot name="block4_2_l"  scale="1"  url="images/3d_img_22.png" ath="-81.075" atv="8.884"  onclick="" />
-		<hotspot name="block4_2"  scale="1"  url="images/3d_img_22_1.png" ath="-81.075" atv="8.884"  onclick="hotspotClick('42')"/>
+		<hotspot name="block4_1_l"  scale="1"  url="images/3d_img_21.png" ath="-87.762" atv="9.405"  onclick="" />
+		<hotspot name="block4_1"  scale="1"  url="images/3d_img_21_1.png" ath="-87.762" atv="9.405"  onclick="hotspotClick('41')"/>
+		<hotspot name="block4_2_l"  scale="1"  url="images/3d_img_22.png" ath="-79.307" atv="8.218"  onclick="" />
+		<hotspot name="block4_2"  scale="1"  url="images/3d_img_22_1.png" ath="-79.307" atv="8.218"  onclick="hotspotClick('42')"/>
 
 
 

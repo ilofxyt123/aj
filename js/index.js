@@ -545,10 +545,8 @@
             this.picUrl+"3d_img_13_1.png",
             this.picUrl+"3d_img_14.png",
             this.picUrl+"3d_img_14_1.png",
-            this.picUrl+"3d_img_14_2.png",
             this.picUrl+"3d_img_15.png",
             this.picUrl+"3d_img_15_1.png",
-            this.picUrl+"3d_img_15_2.png",
             this.picUrl+"3d_img_15_3.png",
             this.picUrl+"3d_img_15_4.png",
             this.picUrl+"3d_img_16.png",
@@ -600,7 +598,6 @@
             this.picUrl+"p4_img_6.png",
             this.picUrl+"p5_img_1.png",
             this.picUrl+"phone.png",
-            this.picUrl+"point.png",
             this.picUrl+"poster.png",
             this.picUrl+"weile.png"
         ];
@@ -622,7 +619,7 @@
         this.block1 = {//视频区域
             success:false,
             successStr:"你已收集到此处图鉴，请寻找其他互动区域",
-            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择"],
+            spotStr:[],
             iconStr:"点击视频查看，找到XXX，即可获取创之视角图鉴。",
             haveFind :[],
             $toolIcon:$(".btn1"),//创之视角
@@ -638,7 +635,7 @@
         this.block3 = {//厨师区域
             success:false,
             successStr:"你已收集到此处图鉴，请寻找其他互动区域",
-            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择"],
+            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
             iconStr:"芝士蛋糕越来越受到年轻一代的喜爱，我正在制作半熟芝士，帮我找一下奶油干酪吧",
             haveFind :[],
             $toolIcon:$(".btn3"),//厨之奥义
@@ -696,7 +693,7 @@
                 if(_self.printer.now == _self.printer.printLen){
                     setTimeout(function(){
                         callback();
-                    },500);
+                    },speed);
                     clearInterval(_self.clockSwitch);
                     _self.clockSwitch = undefined;
                 }
@@ -725,8 +722,8 @@
         rotateView:function(){
             var _self = this;
             setTimeout(function(){
-                Math.animation([0],
-                    [360],
+                Math.animation([-12],
+                    [348],
                     6500,
                     'Sine.easeInOut',
                     function (value) {
@@ -734,7 +731,8 @@
                     },
                     function(){
                         console.log("视角转动结束");
-                        _self.krpano.call("set(view[v2].hlookat,'0');");
+                        $(".rule-mask").fi();
+                        // _self.krpano.call("set(view[v2].hlookat,'348');");
                         _self.allowTouchVr();
                         $(".toolBar").addClass("ani-bar");
                     }
@@ -771,7 +769,7 @@
                     }
                     break;
                 case "2"://糕点区
-                    if(this.block1.success){//找到物品后，视频区域icon文字
+                    if(this.block2.success){//找到物品后，视频区域icon文字
                         this.layer.$txt2.html(this.block2.successStr);
                     }
                     else{
@@ -818,6 +816,15 @@
                         this.layer.$txt2.html(this.block2.spotStr);
                     }
                     break;
+                case "24":
+                    if(this.block2.success){
+                        this.layer.$txt2.html(this.block2.successStr);
+                    }
+                    else{
+                        this.getKey(2);
+                        this.layer.$txt2.html(this.block2.spotStr);
+                    }
+                    break;
                 ////////////////////////糕点区域/////////////////////////
 
                 ////////////////////////厨师区域/////////////////////////
@@ -855,6 +862,14 @@
                         this.layer.$txt3.html(this.block3.spotStr[3]);
                     }
                     break;
+                case "35":
+                    if(this.block3.success){
+                        this.layer.$txt3.html(this.block3.successStr);
+                    }
+                    else{
+                        this.layer.$txt3.html(this.block3.spotStr[4]);
+                    }
+                    break;
                 ////////////////////////厨师区域/////////////////////////
 
                 ////////////////////////后厨展示/////////////////////////
@@ -879,9 +894,9 @@
                 case "w4":
                     this.layer.$txt3.html(this.WhitePointStr[3]);
                     break;
-                case "w5":
-                    this.layer.$txt3.html(this.WhitePointStr[4]);
-                    break;
+                // case "w5":
+                //     this.layer.$txt3.html(this.WhitePointStr[4]);
+                //     break;
                 case "w6":
                     this.layer.$txt3.html(this.WhitePointStr[5]);
                     break;
@@ -1019,6 +1034,10 @@
                     this.layer.$container2.removeClass("none");
                     this.layer.$page.fi();
                     break;
+                case "24":
+                    this.layer.$container2.removeClass("none");
+                    this.layer.$page.fi();
+                    break;
                 case "31"://厨师区域
                     this.layer.$container3.removeClass("none");
                     this.layer.$page.fi();
@@ -1042,6 +1061,9 @@
                 case "42":
                     this.layer.$container3.removeClass("none");
                     this.layer.$page.fi();
+                    break;
+                case "w5":
+                    $(".blue-mask2").fi();
                     break;
                 default:
                     this.layer.$container3.removeClass("none");
@@ -1144,7 +1166,7 @@
             $(".P3").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?1", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?3", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.krpano = document.getElementById("krpanoSWFObject");
@@ -1159,6 +1181,12 @@
         },
         presult:function(){
             $(".P_result").fi();
+        },
+        presultleave:function(){
+            $(".P_result").fo();
+        },
+        pover:function(){
+            $(".P_over").fi();
         },
         pshare:function(){
             $(".P_share").fi();
@@ -1189,6 +1217,10 @@
                     $(".ui-txtBox").addClass("none");
                 });
             });
+
+            $(".rule-mask").on("touchend",function(){
+                $(this).fo();
+            });
             /////////P_layer//////////
 
             /////////P1//////////
@@ -1205,14 +1237,13 @@
             /////////P2/////////
             var EndHandler1 = function(){
                 setTimeout(function(){
-                    console.log(this);
                     $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig ");
                     setTimeout(function(){
                         $(".p2-title1").addClass("ani-p2-t1");
                         $(".p2-title2").addClass("ani-p2-t2");
                         $(".p2-title3").addClass("ani-p2-t3");
                     },1000);
-                    $(this).off("webkitAnimationEnd",EndHandler1).on("webkitAnimationEnd",EndHandler2)
+                    $(".p2-title3").off("webkitAnimationEnd",EndHandler1).on("webkitAnimationEnd",EndHandler2);
                 },1000);
             };
             var EndHandler2 = function(){
@@ -1220,12 +1251,14 @@
                 _self.print(str,$(".op-printer"),150,function(){
                     $(".baidu").addClass("ani-baidu");
                 });
-                $(this).off("webkitAnimationEnd",EndHandler2);
+                $(".p2-title3").off("webkitAnimationEnd",EndHandler2);
             };
             $(".p2-title3").on("webkitAnimationEnd",EndHandler1);
             $(".baidu").on("webkitAnimationEnd",function(){
                 _self.p2leave();
                 _self.p3();
+                console.log(this);
+                $(".baidu").off("webkitAnimationEnd");
             });
             /////////P2/////////
 
@@ -1239,7 +1272,7 @@
 
             /////////blue-mask//////////
             $(".mask-btn1").on("touchend",function(){
-                console.log("恭喜你，选对了正确答案");
+                $(".blue-err").addClass("none");
                 if(!_self.block1.success){
                     _self.getKey(1);
                 }
@@ -1247,10 +1280,14 @@
                 _self.account();
             });
             $(".mask-btn2").on("touchend",function(){
-                console.log("答案不正确，请继续选择");
+                if(!_self.block1.success){
+                    $(".blue-err").removeClass("none");
+                }
             });
             $(".mask-btn3").on("touchend",function(){
-                console.log("答案不正确，请继续选择");
+                if(!_self.block1.success){
+                    $(".blue-err").removeClass("none");
+                }
             });
             // $(".play-btn").on("touchend",function(){
             //     _self.V.obj.play();
@@ -1286,6 +1323,10 @@
                     console.log("安卓");
                 }
             });
+
+            $(".blue2xx").on("touchend",function(){
+                $(".blue-mask2").fo();
+            });
             /////////blue-mask//////////
 
 
@@ -1293,8 +1334,12 @@
             $(".P_share").on("touchend",function(){
                 $(this).fo();
             });
-            $(".result-btn1").on("touchend",function(){
+            $(".pk-btn").on("touchend",function(){
                 _self.pshare();
+            });
+            $(".result-submit").on("touchend",function(){
+                _self.presultleave();
+                _self.pover();
             });
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )

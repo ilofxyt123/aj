@@ -52,9 +52,6 @@
     <div class="bgBlock bk-theme"></div>
     <img src="images/p1_img_1.png" class="cloud cloudR animate none ani-cloud">
     <img src="images/p1_img_2.png" class="cloud cloudL animate none ani-cloud alternate">
-
-
-
 </div>
 <div class="container P_loading">
     <img src="images/load_img_1.png" class="load-title">
@@ -139,7 +136,7 @@
         .p2-bg{left:0;top:334px;width:640px;height:668px;position: absolute;}
             .p2-bg-pic{left:0;top:0;z-index:1;}
             .printBox{width:310px;height:18px;position: absolute;left:170px;top:115px;z-index:2;}
-                .op-printer{width:258px;height:18px;line-height:18px;position: absolute;left:0;top:0;color:black;font-size:16px;}
+                .op-printer{width:258px;height:18px;line-height:18px;position: absolute;left:0;top:0;color:black;font-size:14px;}
                 .baidu{position: absolute;right:0;top:0;}
 </style>
 
@@ -167,7 +164,9 @@
             <!--embedpano({swf:"tour.swf", xml:"tour.xml?c", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});-->
         <!--</script>-->
     </div>
-
+    <div class="rule-mask none">
+        <img src="images/3d_img_0.png" class="rule-txt">
+    </div>
 
     <div class="toolBar bk-theme opacity">
         <div class="ui-btn btn1">
@@ -221,21 +220,29 @@
     </div><!--z-index3-->
 
     <div class="blue-mask none">
-        <div class="maskxx none"></div>
+        <img src="images/3d_img_15.png" class="blue-question">
         <div class="videoBox">
             <video src="video/video.mp4" id="video"  width="540" x-webkit-airplay="true" webkit-playsinline playsinline airplay="allow" x5-video-player-type="h5" class="iosPreload" poster="images/poster.png"></video>
             <img src="images/3d_img_15_1.png" class="play-btn">
         </div>
+        <p class="blue-err none">你所选的答案错误，请重新选择</p>
         <img src="images/3d_img_15_3.png" class="mask-btn1">
-        <img src="images/3d_img_15_3.png" class="mask-btn2">
-        <img src="images/3d_img_15_3.png" class="mask-btn3">
+        <img src="images/3d_img_15_3_1.png" class="mask-btn2">
+        <img src="images/3d_img_15_3_2.png" class="mask-btn3">
     </div><!--z-index10-->
+
+    <div class="blue-mask2 none">
+        <img src="images/3d_img_3.png" class="blue2xx">
+        <img src="images/3d_img_22_2.png" class="food-pic">
+    </div>
 
 
 </div>
 <style>
     .P_vr{}
         #pano{position: absolute;top:0;left:0;}
+        .rule-mask{position: absolute;z-index:10;width:100%;height:100%;background-color:rgba(0,0,0,0.8);}
+            .rule-txt{top:280px;left:0;}
         .toolBar{position: absolute;bottom:0;width:100%;height:105px;z-index:3;}
             .toolBar .center{left:50%;margin-left:-50px;top:50%;margin-top:-50px;}
             .ui-btn{width:120px;height:165px;position: absolute;bottom:0;}
@@ -255,12 +262,17 @@
                             .circl-light-outer{right: 10px;top:10px;}
                         .btn-txt{left:50%;margin-left:-62px;top:110px;}
         .blue-mask{width:100%;height:100%;position: absolute;z-index:10;background-color:rgba(19,68,108,0.8);}
+            .blue-question{left:0;top:90px;}
             .videoBox{width:558px;height:322px;position: absolute;top:214px;left:50%;margin-left:-279px;padding:9px;}
+            .blue-err{color:red;position: absolute;width:640px;height:30px;line-height:30px;font-size:26px;text-align: center;top:560px;}
             /*#video{position: absolute;top:214px;left:50%;margin-left:-279px;}*/
                 .play-btn{left:50%;margin-left:-33px;top:50%;margin-top:-33px;z-index:2;}
-            .mask-btn1{left:50%;margin-left:-113px;top:615px;}
-            .mask-btn2{left:50%;margin-left:-113px;top:712px;}
-            .mask-btn3{left:50%;margin-left:-113px;top:815px;}
+            .mask-btn1{left:50%;margin-left:-183px;top:615px;}
+            .mask-btn2{left:50%;margin-left:-183px;top:712px;}
+            .mask-btn3{left:50%;margin-left:-183px;top:815px;}
+        .blue-mask2{width:100%;height:100%;position: absolute;z-index:10;background-color:rgba(19,68,108,0.8);}
+            .food-pic{left:0;top:50px;}
+            .blue2xx{top:20px;right:25px;z-index:2;}
 </style>
 
 <div class="container P_layer none">
@@ -312,38 +324,58 @@
 
 <div class="container P_result none">
     <img src="images/p4_img_1.png" class="result-txt1">
-    <img src="images/p3_img_1.png" class="result-bg1">
-    <img src="images/p3_img_4.png" class="result-bg2">
-    <img src="images/p1_img_1.png" class="bg-cloud">
+    <img src="images/p3_img_1.png" class="ui-bg1">
+    <img src="images/p3_img_4.png" class="ui-bg2">
+    <img src="images/p1_img_1.png" class="ui-cloud-small">
 
-    <img src="images/p4_img_2.png" class="result-prize">
-    <div class="result-txtBox">
-        <img src="images/p4_img_3.png">
-        <span class="percent">30</span>
+
+
+    <div class="result-input-box">
+        <input id="phone" class="input-phone">
     </div>
+    <div class="result-submit"></div>
 
-    <img src="images/p4_img_4.png" class="result-ui-btn1">
-    <div class="result-btn1"></div>
+    <img src="images/p4_img_5.png" class="result-ui-submit">
 
-    <img src="images/p4_img_5.png" class="result-btn2">
-
-    <img src="images/p4_img_6.png" class="e-code">
 
 </div>
 <style>
     .P_result{}
-        .result-txt1{top:96px;left:50%;margin-left:-204px;z-index:2;}
-        .result-bg1{top:30px;left:55px;z-index:1;}
-        .result-bg2{top:760px;left:50px;z-index:1;}
-        .bg-cloud{width:60px;left:55px;top:820px;}
+        .result-txt1{top:130px;z-index:2;}
+        .ui-bg1{top:30px;left:55px;z-index:1;}
+        .ui-bg2{top:760px;left:50px;z-index:1;}
+        .ui-cloud-small{width:60px;left:55px;top:820px;}
 
-        .result-prize{left:50%;margin-left:-167px;top:305px;}
-        .result-txtBox{width:367px;height:60px;top:522px;left:50%;margin-left:-183px;position: absolute;}
-            .percent{position: absolute;height:24px;line-height:24px;left:224px;width:60px;text-align: center;color:white;top:0;}
-        .result-ui-btn1{left:190px;top:630px;}
-        .result-btn1{width:260px;height:66px;top:630px;left:190px;z-index:10;position: absolute;}
-        .result-btn2{top:730px;left:50%;margin-left:-73px;}
-        .e-code{top:790px;left:50%;margin-left:-150px;z-index:5;}
+        .result-input-box{width:404px;height:57px;position: absolute;left:50%;margin-left:-202px;top:594px;z-index:10;background-image:url('images/p4_img_4.png');background-repeat: no-repeat;}
+            .input-phone{width:404px;height:50px;line-height:50px;margin:3px 2px;padding:10px;font-size:26px;color:white;background-color:rgba(0,0,0,0);outline:none;border:none;text-align: center;}
+        .result-submit{width:260px;height:66px;top:800px;left:190px;z-index:10;position: absolute;}
+        .result-ui-submit{top:800px;left:192px;z-index:2;}
+
+</style>
+
+<div class="container P_over none">
+    <img src="images/p3_img_1.png" class="ui-bg1">
+    <img src="images/p3_img_4.png" class="ui-bg2">
+    <img src="images/p1_img_1.png" class="ui-cloud-small">
+
+    <div class="over-txtBox">
+        <img src="images/p4_img_3.png">
+        <span class="percent">30</span>
+    </div>
+    <img src="images/p4_img_5_1.png" class="ui-pk-btn">
+    <div class="pk-btn"></div>
+    <img src="images/p4_img_6.png" class="e-code">
+
+</div>
+
+<style>
+    .P_over{}
+        .over-txtBox{width:398px;height:66px;top:224px;left:50%;margin-left:-199px;position: absolute;}
+            .percent{position: absolute;height:24px;line-height:24px;left:255px;width:60px;text-align: center;color:white;top:0;}
+        .ui-pk-btn{left:190px;top:340px;}
+        .pk-btn{width:260px;height:70px;left:190px;top:340px;position: absolute;z-index:5;}
+        .e-code{top:140px;left:0;z-index:1;}
+
 
 </style>
 
