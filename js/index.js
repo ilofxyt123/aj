@@ -611,6 +611,7 @@
             $container1:$(".op-icon1"),
             $container2:$(".op-icon2"),
             $container3:$(".op-icon3"),
+            $container4:$(".op-white1"),
             $txt1:$(".op-icon1 .addTxt"),
             $txt2:$(".op-icon2 .addTxt"),
             $txt3:$(".op-icon3 .addTxt")
@@ -652,6 +653,13 @@
             currentTime:0,
             isPlay:false,
             obj:document.getElementById("video")
+        };
+        
+        this.flash = {
+            startAlpha : 1,
+            endAlpha : 0,
+            dir:1,
+            aniType:"Sine.easeOut"
         };
 
         this.swiper1;
@@ -953,6 +961,43 @@
                 console.log("还差"+(3-l)+"个图鉴即可打开胜利之门");
             }
         },//检测是否已经收集全所有
+        
+        flashAni:function(){
+            var _self = this;
+            Math.animation([_self.flash.startAlpha],
+                [_self.flash.endAlpha],
+                1000,
+                _self.flash.aniType,
+                function (value) {
+                    _self.krpano.call("set(hotspot[block2_1_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block2_2_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block2_3_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block2_4_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block3_1_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block3_2_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block3_3_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block3_4_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block4_1_l].alpha,'"+value[0]+"');");
+                    _self.krpano.call("set(hotspot[block4_2_l].alpha,'"+value[0]+"');");
+                },
+                function(){
+                    _self.flash.dir = -_self.flash.dir;
+                    if(_self.flash.dir == 1){
+                        _self.flash.startAlpha = 1;
+                        _self.flash.endAlpha = 0;
+                        _self.flash.aniType = "Sine.easeOut"
+                    }
+                    else{
+                        _self.flash.startAlpha = 0;
+                        _self.flash.endAlpha = 1;
+                        _self.flash.aniType = "Sine.easeIn"
+                    }
+                    if(_self.flashAni){
+                        _self.flashAni();
+                    }
+                }
+            );
+        },
         //////////////辅助类函数/////////////
 
         //////////////kp对外/////////////
@@ -989,10 +1034,10 @@
                     }
                     _self.allowTouchVr();//允许touch
                     $(".P_layer").fi(function(){
-                        _self.swiper1.update();
-                        _self.swiper1.slideTo(1,0);
                         _self.swiper1.startAutoplay();
                     });//layer出现
+                    _self.swiper1.update();
+                    _self.swiper1.slideTo(1,0);
 
                 }
             );
@@ -1071,6 +1116,15 @@
                 case "w5":
                     $(".blue-mask2").fi();
                     break;
+                case "swiper2":
+                    var _self = this;
+                    this.layer.$container4.removeClass("none");
+                    this.layer.$page.fi(function(){
+                        _self.swiper2.startAutoplay();
+                    });
+                    this.swiper2.update();
+                    this.swiper2.slideTo(1,0);
+                    break;
                 default:
                     this.layer.$container3.removeClass("none");
                     this.layer.$page.fi();
@@ -1102,20 +1156,19 @@
 
         //////////////流程类函数/////////////
         init:function(){
-            console.log(this);
             this.swiper1 = new Swiper ('.op-icons .swiper-container',{
                 direction : 'vertical',//纵向
                 onlyExternal : true,//不可touch和mouse
-                autoplay : 800,//自动播放
+                autoplay : 1500,//自动播放
                 loop : true,//循环
                 // slideClass:"slideClass1"
             });
-            // this.swiper2 = new Swiper ('.op-icons .swiper-container',{
-            //     direction : 'vertical',//纵向
-            //     onlyExternal : true,//不可touch和mouse
-            //     autoplay : 500,//自动播放
-            //     loop : true,//循环
-            // });
+            this.swiper2 = new Swiper ('.op-white1 .swiper-container',{
+                direction : 'vertical',//纵向
+                onlyExternal : true,//不可touch和mouse
+                autoplay : 1500,//自动播放
+                loop : true,//循环
+            });
         },
         start:function(){
             Utils.preloadImage(this.ImageList,function(){this.loadingOver = true;}.bind(this));
@@ -1210,6 +1263,7 @@
             $(".P_vr").fi();
             this.krpano.call("loadscene(scene_2,null,get(skin_settings.loadscene_flags),get(skin_settings.loadscene_blend))");
             this.rotateView();
+            this.flashAni();
         },
         pvrleave:function(){
             $(".P_vr").fo();
@@ -1309,12 +1363,9 @@
 
             /////////blue-mask//////////
             $(".mask-btn1").on("touchend",function(){
-                $(".blue-err").addClass("none");
                 if(!_self.block1.success){
-                    _self.getKey(1);
+                    $(".blue-err").removeClass("none");
                 }
-                $(".blue-mask").fo();
-                _self.account();
             });
             $(".mask-btn2").on("touchend",function(){
                 if(!_self.block1.success){
@@ -1322,9 +1373,12 @@
                 }
             });
             $(".mask-btn3").on("touchend",function(){
+                $(".blue-err").addClass("none");
                 if(!_self.block1.success){
-                    $(".blue-err").removeClass("none");
+                    _self.getKey(1);
                 }
+                $(".blue-mask").fo();
+                _self.account();
             });
             // $(".play-btn").on("touchend",function(){
             //     _self.V.obj.play();
@@ -1335,12 +1389,10 @@
                 pause:function(){
                     _self.V.isPlay = false;
                     $(".play-btn").fi();
-                    alert("视频暂停");
                 },
                 ended:function(){
                     _self.V.isPlay = false;
                     $(".play-btn").fi();
-                    alert("视频end了")
                 }
             });
             $(".videoBox").on("touchend",function(){

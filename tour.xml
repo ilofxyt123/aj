@@ -104,7 +104,7 @@
 
 		<!-- place your scene hotspots here -->
 		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="-11.909" atv="-7.238"  onclick="iCon('s')" /><!-- 迎宾区高亮icon -->
-		<hotspot name="tip_red"  scale="0.5"  url="images/3d_img_20_1.png" ath="38.775" atv="8.934"  onclick="" visible="true"/><!--未找到所有图鉴显示为红色-->
+		<hotspot name="tip_red"  scale="0.5"  url="images/3d_img_20_1.png" ath="38.775" atv="8.934"  onclick="hotspotClick('swiper2')" visible="true"/><!--未找到所有图鉴显示为红色-->
 		<hotspot name="tip_blue"  scale="0.5"  url="images/3d_img_20.png" ath="38.775" atv="8.934"  onclick="exit()" visible="false"/><!--点击退出场景-->
 
 		<!--<hotspot name="White_1"  scale="1"  url="images/point.png" ath="57.396" atv="-5.771"  onclick="hotspotClick('w1')"/>&lt;!&ndash;白点 &ndash;&gt;-->
