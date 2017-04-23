@@ -506,7 +506,7 @@
             startV:0,//起始纵坐标
             endH:0,//终点横坐标
             endV:0,//终点纵坐标
-            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0}]//多个需要转到的角度
+            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0},{h:38.775,v:0}]//多个需要转到的角度
         };
 
         this.bgm ={
@@ -654,6 +654,8 @@
             obj:document.getElementById("video")
         };
 
+        this.swiper1;
+        this.swiper2;
         this.init();
     };
     Main.prototype = {
@@ -986,7 +988,12 @@
                             break;
                     }
                     _self.allowTouchVr();//允许touch
-                    $(".P_layer").fi();//layer出现
+                    $(".P_layer").fi(function(){
+                        _self.swiper1.update();
+                        _self.swiper1.slideTo(1,0);
+                        _self.swiper1.startAutoplay();
+                    });//layer出现
+
                 }
             );
             // switch(n){
@@ -1087,6 +1094,7 @@
             //         _self.presult();
             //     }
             // );
+            
             this.pvrleave();
             this.presult();
         },
@@ -1094,7 +1102,20 @@
 
         //////////////流程类函数/////////////
         init:function(){
-            console.log("init");
+            console.log(this);
+            this.swiper1 = new Swiper ('.op-icons .swiper-container',{
+                direction : 'vertical',//纵向
+                onlyExternal : true,//不可touch和mouse
+                autoplay : 800,//自动播放
+                loop : true,//循环
+                // slideClass:"slideClass1"
+            });
+            // this.swiper2 = new Swiper ('.op-icons .swiper-container',{
+            //     direction : 'vertical',//纵向
+            //     onlyExternal : true,//不可touch和mouse
+            //     autoplay : 500,//自动播放
+            //     loop : true,//循环
+            // });
         },
         start:function(){
             Utils.preloadImage(this.ImageList,function(){this.loadingOver = true;}.bind(this));

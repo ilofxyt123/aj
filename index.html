@@ -22,7 +22,7 @@
     <meta name="HandheldFriendly" content="true"/>
     <meta name="apple-touch-fullscreen" content="yes"/>
     <link href="css/common.css" rel="stylesheet" type="text/css">
-    <script src="tour.js"></script>
+    <link href="css/swiper.min.css" rel="stylesheet" type="text/css">
     <script>
         var css;
         css = '<'+'link '+'href='+"css/common.css?v"+Math.random()+' rel='+"stylesheet "+'type='+"text/css"+'>';
@@ -276,13 +276,13 @@
 </style>
 
 <div class="container P_layer none">
-    <div class="ui-txtBox op-icons none">
-            <div class="visible_area">
-                <ul class="scroller">
-                    <li class="scroll-item like-table">
+    <div class="ui-txtBox op-icons">
+            <div class="visible_area swiper-container">
+                <ul class="scroller swiper-wrapper">
+                    <li class="scroll-item like-table swiper-slide">
                         <p class="like-cell">您好！欢迎光临Bakery China 2017安佳展台。</p>
                     </li>
-                    <li class="scroll-item like-table">
+                    <li class="scroll-item like-table swiper-slide">
                         <p class="like-cell">集齐三个图鉴就能合成打开商业先机之门的秘钥，商机寻宝之旅即将开启！</p>
                     </li>
                 </ul>
@@ -397,11 +397,12 @@
 <script src="js/jquery-1.11.3.min.js"></script>
 <input type="hidden" id="is_end" value="0" /><!--活动是否结束-->
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
+<script src="js/swiper.jquery.min.js"></script>
 <script>
     var js;
     js = '<' + 'script ' + 'src=' + "js/index.js?v" + Math.random() + '>' + '</' + 'script' + '>'
     document.write(js)
 </script>
+<script src="tour.js"></script>
 </body>
 </html>
