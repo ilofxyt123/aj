@@ -349,6 +349,7 @@
         this.preloadImage = function(ImageURL,callback,realLoading){
             var rd = realLoading||false;
             var i,j,haveLoaded = 0;
+            var _self = this;
             for(i = 0,j = ImageURL.length;i<j;i++){
                 (function(img, src) {
                     img.onload = function() {
@@ -359,6 +360,7 @@
                             $(".num").html("- "+num + "% -");
                         }
                         if (haveLoaded == ImageURL.length && callback) {
+                            _self.lazyLoad();
                             setTimeout(callback, 500);
                         }
                     };
@@ -369,19 +371,19 @@
                 }(new Image(), ImageURL[i]));
             }
         },//图片列表,图片加载完后回调函数，是否需要显示百分比
-            this.lazyLoad = function(){
-                var a = $(".lazy");
-                var len = a.length;
-                var imgObj;
-                var Load = function(){
-                    for(var i=0;i<len;i++){
-                        imgObj = a.eq(i);
-                        imgObj.attr("src",imgObj.attr("data-src"));
-                    }
-                };
-                Load();
-            },//将页面中带有.lazy类的图片进行加载
-            this.browser = function(t){
+        this.lazyLoad = function(){
+            var a = $(".lazy");
+            var len = a.length;
+            var imgObj;
+            var Load = function(){
+                for(var i=0;i<len;i++){
+                    imgObj = a.eq(i);
+                    imgObj.attr("src",imgObj.attr("data-src"));
+                }
+            };
+            Load();
+        },//将页面中带有.lazy类的图片进行加载
+        this.browser = function(t){
                 var u = navigator.userAgent;
                 var u2 = navigator.userAgent.toLowerCase();
                 var p = navigator.platform;
@@ -406,12 +408,12 @@
                 };
                 return browserInfo[t];
             },//获取浏览器信息
-            this.g=function(id){
-                return document.getElementById(id);
-            },
-            this.E=function(selector,type,handle){
-                $(selector).on(type,handle);
-            }
+        this.g=function(id){
+            return document.getElementById(id);
+        },
+        this.E=function(selector,type,handle){
+            $(selector).on(type,handle);
+        }
     };
     var Media = new function(){
         this.mutedEnd = false;
@@ -620,7 +622,7 @@
             success:false,
             successStr:"你已收集到此处图鉴，请寻找其他互动区域",
             spotStr:[],
-            iconStr:"点击视频查看，找到XXX，即可获取创之视角图鉴。",
+            iconStr:"点击视频查看，找到我们是谁，即可获取创之视角图鉴。",
             haveFind :[],
             $toolIcon:$(".btn1"),//创之视角
         };
@@ -747,22 +749,6 @@
                     }
                 );
             },1000);
-        },
-        fixView:function(hd,compare){
-            var round = Math.abs(parseInt(hd/360));//圈数处理
-            if(hd>0){
-                hd = hd-360*round;
-            }
-            else{
-                hd = hd+360*round;
-            }
-            console.log(hd);
-            // var sub((compare-hd)/360)//相差的度数除以360，得到圈数
-            return hd;
-            //此时弧度在正负360度以内;
-            // if(compare>hd){
-            //
-            // }
         },
         setIconLayerTxt:function(n){
             switch(n){
@@ -915,6 +901,38 @@
             }
 
         },//设置普通热点提示文字
+        fixView:function(hd,compare){
+            var round = Math.abs(parseInt(hd/360));//圈数处理
+            if(hd>0){
+                hd = hd-360*round;
+            }
+            else{
+                hd = hd+360*round;
+            }
+            //不改变弧度的正负，只去除多余的圈数，防止运动时转圈
+
+            var sub = [],
+                tempHd=[hd,hd+360,hd-360];
+
+            sub = [tempHd[0]-compare,tempHd[1]-compare,tempHd[2]-compare];
+
+            var minSub = Math.abs(sub[0]),
+                minSubIndex = 0;
+            for(var i = 0;i<3;i++){
+                if(Math.abs(sub[i])<minSub){
+                    minSub = Math.abs(sub[i]);//得到最小的sub
+                    minSubIndex = i;//得到最小sub的index
+                }
+            }
+
+
+
+            return tempHd[minSubIndex];
+            //此时弧度在正负360度以内;
+            // if(compare>hd){
+            //
+            // }
+        },
         processViewData:function(n){
             var _self = this;
             if(n=="s"){
@@ -949,7 +967,7 @@
                     $(".btn3 .light").removeClass("none");
                     break;
             }
-        },
+        },//开启工具条图标
         account:function(){
             var l = this.gameData.haveFind.length;
             if(l==3){
@@ -997,7 +1015,7 @@
                     }
                 }
             );
-        },
+        },//热点闪烁
         //////////////辅助类函数/////////////
 
         //////////////kp对外/////////////
@@ -1269,6 +1287,7 @@
             $(".P_vr").fo();
         },
         presult:function(){
+            this.top();
             $(".P_result").fi(function(){
                 $(".P_dreamer").addClass("none");
             });
@@ -1319,16 +1338,27 @@
                 setTimeout(function(){
                     _self.p1leave();
                     _self.p2();
-                },1000);
+                },1500);
                 _self.loadVr();
                 $(this).off("webkitAnimationEnd");
             });
+            var pop3Handle1 = function(){
+                $(this).removeClass("opacity ani-pop delay06");
+                $(".pop1,.pop2").removeClass("opacity ani-pop delay02 delay04").fo();
+                $(this).off("webkitAnimationEnd",pop3Handle1).on("webkitAnimationEnd",pop3Handle2).addClass("ani-pop2");
+            };
+            var pop3Handle2 = function(){
+                $(".p1-man").addClass("ani-toBig");
+                $(this).removeClass("opacity ani-pop delay06");
+                $(this).off("webkitAnimationEnd",pop3Handle2);
+            };
+            $(".pop3").on("webkitAnimationEnd",pop3Handle1);
             /////////P1/////////
 
             /////////P2/////////
             var EndHandler1 = function(){
                 setTimeout(function(){
-                    $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig ");
+                    $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig");
                     setTimeout(function(){
                         $(".p2-title1").addClass("ani-p2-t1");
                         $(".p2-title2").addClass("ani-p2-t2");

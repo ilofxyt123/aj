@@ -41,7 +41,7 @@ html,body{
 .P_loading{}
     .load-title{top:34px;left:50%;margin-left:-133px;}
     .loaderBox{width:222px;height:574px;top:210px;position: absolute;left:50%;margin-left:-111px;}
-        .three-milk{width:40px;margin:0 auto;position: relative;z-index:1;}
+        .three-milk{width:40px;height:58px;margin:0 auto;position: relative;z-index:1;}
             .small-circle{width:16px;position: static;margin-bottom:5px;margin-left:auto;margin-right:auto;}
             .milk-down{margin:0 auto;}
         .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("../images/load_img_4.png?2");-webkit-mask-image:url("../images/load_img_3.png");background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:200px;background-repeat: no-repeat;transition:background-position-y 0.3s linear;}
@@ -68,10 +68,10 @@ html,body{
     .p2-title1{left:204px;top:70px;z-index:2;}
     .p2-title2{left:66px;top:205px;z-index:2;}
     .p2-title3{left:374px;top:205px;z-index:2;}
-    .p2-bg{left:0;top:334px;width:640px;height:668px;position: absolute;}
+    .p2-bg{left:0;bottom:0;width:640px;height:668px;position: absolute;}
         .p2-bg-pic{left:0;top:0;z-index:1;}
         .printBox{width:310px;height:18px;position: absolute;left:170px;top:115px;z-index:2;}
-            .op-printer{width:258px;height:18px;line-height:18px;position: absolute;left:0;top:0;color:black;font-size:14px;}
+            .op-printer{width:258px;height:18px;line-height:18px;position: absolute;left:0;top:1px;color:black;font-size:14px;}
             .baidu{position: absolute;right:0;top:0;}
 
 .P3{}
@@ -79,7 +79,7 @@ html,body{
     .p3-bg2{top:220px;left:84px;z-index:2;}
     .p3-btn-ui{top:720px;left:150px;}
     .bg-icon{top:220px;left:84px;z-index:1;}
-    .bg-mountain{top:760px;left:50px;z-index:-1;}
+    .bg-mountain{bottom:0;left:50px;z-index:-1;}
     .p3-btn{top:720px;left:150px;width:340px;height:70px;position: absolute;z-index:3;}
 
 .P_vr{}
@@ -104,7 +104,7 @@ html,body{
                         .circl-light-dash{left: 10px;top:10px;}
                         .circl-light-outer{right: 10px;top:10px;}
                     .btn-txt{left:50%;margin-left:-62px;top:110px;}
-    .blue-mask{width:100%;height:100%;position: absolute;z-index:10;background-color:rgba(19,68,108,0.8);}
+    .blue-mask{width:100%;height:100%;position: absolute;z-index:10;background-color:rgba(19,68,108,0.9);}
         .blue-question{left:0;top:90px;}
         .videoBox{width:558px;height:322px;position: absolute;top:214px;left:50%;margin-left:-279px;padding:9px;}
         .blue-err{color:red;position: absolute;width:640px;height:30px;line-height:30px;font-size:26px;text-align: center;top:560px;}

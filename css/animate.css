@@ -334,6 +334,32 @@
     animation:ani-pop 0.3s ease-out 1 forwards;
 }
 
+@-webkit-keyframes ani-pop2{
+    0% {
+        -webkit-transform: scale(1) translate(0,0);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scale(0.1)  translate(-120px,-353px);
+        opacity: 0;
+    }
+}
+@keyframes ani-pop2{
+    0% {
+        transform: scale(1) translate(0,0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1) translate(-120px,-353px);
+        opacity: 0;
+    }
+}
+
+.ani-pop2 {
+    -webkit-animation:ani-pop2 1s ease-out 1 forwards;
+    animation:ani-pop2 1s ease-out 1 forwards;
+}
+
 .ani-toBig {
     animation: ani-toBig .6s ease-out 1 forwards;
     -webkit-animation: ani-toBig .6s ease-out 1 forwards;
@@ -419,29 +445,6 @@
 }
 
 .ani-baidu {
-    animation: ani-baidu 0.8s linear infinite alternate forwards;
-    -webkit-animation: ani-baidu 0.8s linear infinite alternate forwards;
-}
-
-@keyframes ani-baidu {
-    0% {
-        transform: scale(1,1);
-    }
-    100% {
-        -webkit-transform: scale(2);
-    }
-}
-
-@-webkit-keyframes ani-baidu {
-    0% {
-        -webkit-transform: scale(1);
-    }
-    100% {
-        -webkit-transform: scale(2);
-    }
-}
-
-.ani-baidu {
     animation: ani-baidu 0.8s linear 2 alternate forwards;
     -webkit-animation: ani-baidu 0.8s linear 2 alternate forwards;
 }
@@ -451,7 +454,7 @@
         transform: scale(1,1);
     }
     100% {
-        transform: scale(2);
+        -webkit-transform: scale(2);
     }
 }
 
@@ -463,6 +466,8 @@
         -webkit-transform: scale(2);
     }
 }
+
+
 
 .ani-p2-t1 {
     animation: ani-p2-t1 0.8s linear  forwards;
