@@ -13,3 +13,5 @@ js/browser.js
 .idea/安佳.iml
 *.tmp
 *.pptx
+js/swiper.jquery.min.js
+css/swiper.min.css
