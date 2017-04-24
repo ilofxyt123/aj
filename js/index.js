@@ -969,9 +969,26 @@
             }
         },//开启工具条图标
         account:function(){
+            var _self = this;
             var l = this.gameData.haveFind.length;
             if(l==3){
-                console.log("所有图鉴收集完成，成功开启胜利之门");
+                _self.banTouchVr();
+                $(".btn-txt").fo(function(){//图标底下文字隐去
+                    $(".ui-white-circle").css({"opacity":"1"});//按钮变白
+                    setTimeout(function(){//白完以后向中间移动
+                        $(".btn1").css({"transform":"translateX(190px)"});
+                        $(".btn3").css({"transform":"translateX(-190px)"});
+                        $(".btnV").removeClass("none");//钥匙图标出现
+                    },1000);
+                    setTimeout(function(){
+                        $(".btn1,.btn2,.btn3").addClass("none");
+                        $(".btnV .ui-white-circle").css({"opacity":"0"});
+                        $(".btnV-txt").fi(1000,function(){
+                            _self.allowTouchVr();
+                        });
+                    },2000)
+
+                });
                 this.krpano.call("set(hotspot[tip_red].visible,false)");
                 this.krpano.call("set(hotspot[tip_blue].visible,true)");
             }
@@ -979,7 +996,7 @@
                 console.log("还差"+(3-l)+"个图鉴即可打开胜利之门");
             }
         },//检测是否已经收集全所有
-        
+
         flashAni:function(){
             var _self = this;
             Math.animation([_self.flash.startAlpha],
@@ -1152,23 +1169,35 @@
         },//普通热点
         exit:function(){
             var _self = this;
-            // var dreamer = $(".P_dreamer");
-            // Math.animation([130,0.5,0],
-            //     [100,2,1],
-            //     1000,
-            //     'Sine.easeIn',
-            //     function (value) {
-            //         _self.krpano.call("set(view[v2].fov,'"+value[0]+"');");
-            //         _self.krpano.call("set(hotspot[tip_blue].scale,'"+value[1]+"');");
-            //     },
-            //     function(){
-            //         $(".P_vr").addClass("none");
-            //         _self.presult();
-            //     }
-            // );
+            var dreamer = $(".P_dreamer");
+            dreamer.removeClass("none");
+            _self.processViewData(4);//处理视角
+            Math.animation([_self.view.h,_self.view.v],
+                [_self.view.endH,_self.view.endV],
+                1000,
+                'Sine.easeInOut',
+                function (value) {
+                    _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+                    _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
+                },
+                function(){
+                    $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
+                    dreamer.css({"opacity":"1"});//画面变白
+                    setTimeout(function(){
+                        $(".P_vr").addClass("none");
+                        $(".P_result").removeClass("none")
+                        _self.top();
+                        dreamer.css({"opacity":"0"})
+                    },1000);
+                    setTimeout(function(){
+                        dreamer.addClass("none");
+                    },2000);
+                    // _self.presult();
+                }
+            );
             
-            this.pvrleave();
-            this.presult();
+            // this.pvrleave();
+            // this.presult();
         },
         //////////////kp对外/////////////
 

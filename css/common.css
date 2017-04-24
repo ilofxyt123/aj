@@ -139,6 +139,7 @@ a, button, input {
 .opacity{opacity:0;}
 .bk-black{background-color: black;}
 .bk-theme{background-color: #023866;}
+.bk-theme-alpha{background-color:rgba(2,56,102,0.9);}
 .scale09{
     transform:scale(0.9);
 }
