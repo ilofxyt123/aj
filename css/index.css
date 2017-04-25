@@ -44,7 +44,7 @@ html,body{
         .three-milk{width:40px;height:58px;margin:0 auto;position: relative;z-index:1;}
             .small-circle{width:16px;position: static;margin-bottom:5px;margin-left:auto;margin-right:auto;}
             .milk-down{margin:0 auto;}
-        .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("../images/load_img_4.png?2");-webkit-mask-image:url("../images/load_img_3.png");background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:200px;background-repeat: no-repeat;transition:background-position-y 0.3s linear;}
+        .loader-circle{width:222px;height:222px;border-radius:50%;background-image: url("../images/load_img_4.png?2");-webkit-mask-image:url("../images/load_img_3.png?v2");-webkit-mask-position:-3px -3px;background-color:#064578;position: absolute;left:50%;margin-left:-111px;top:86px;overflow: hidden;background-position-y:200px;background-repeat: no-repeat;transition:background-position-y 0.3s linear;}
             .bubble1{left:-8px;top:52px;width:17px;}
             .bubble2{left:133px;top:-30px;width:28px;}
             .bubble3{left:42px;top:82px;width:39px;}

@@ -607,6 +607,8 @@
             success:false,
             haveFind : [],//底部的秘籍
             prize:["toolBar-icon1","toolBar-icon2","toolBar-icon3"],
+            haveTouchExit:false,//是否已经点击过蓝色门
+            haveAccount:false//是否已经结算过成绩,意味着结束游戏3个按钮动画已经做过
         };
         this.layer = {
             $page:$(".P_layer"),
@@ -629,7 +631,7 @@
         this.block2 = {//糕点区域
             success:false,
             successStr:"你已收集到此处图鉴，请寻找其他互动区域",
-            spotStr:["恭喜您激活了密之配方"],
+            spotStr:["芝士挞（咖啡、芒果）,恭喜您激活了密之配方","慕思（巧克力，芒果）,恭喜您激活了密之配方","椰香卷 （焦糖，抹茶）,恭喜您激活了密之配方","半熟乳酪（轻，重）,恭喜您激活了密之配方"],
             iconStr:"点击展柜中的产品查看配方即可获取密之配方图鉴",
             haveFind :[],
             $toolIcon:$(".btn2"),//密之配方
@@ -790,7 +792,7 @@
                     }
                     else{
                         this.getKey(2);
-                        this.layer.$txt2.html(this.block2.spotStr);
+                        this.layer.$txt2.html(this.block2.spotStr[0]);
                     }
                     break;
                 case "22":
@@ -799,7 +801,7 @@
                     }
                     else{
                         this.getKey(2);
-                        this.layer.$txt2.html(this.block2.spotStr);
+                        this.layer.$txt2.html(this.block2.spotStr[1]);
                     }
                     break;
                 case "23":
@@ -808,7 +810,7 @@
                     }
                     else{
                         this.getKey(2);
-                        this.layer.$txt2.html(this.block2.spotStr);
+                        this.layer.$txt2.html(this.block2.spotStr[2]);
                     }
                     break;
                 case "24":
@@ -817,7 +819,7 @@
                     }
                     else{
                         this.getKey(2);
-                        this.layer.$txt2.html(this.block2.spotStr);
+                        this.layer.$txt2.html(this.block2.spotStr[3]);
                     }
                     break;
                 ////////////////////////糕点区域/////////////////////////
@@ -895,6 +897,9 @@
                 case "w6":
                     this.layer.$txt3.html(this.WhitePointStr[5]);
                     break;
+                case "red":
+                    this.layer.$txt3.html("集齐3个图鉴获取秘钥后方可开启");
+                    break;
                 ////////////////////////白点/////////////////////////
 
 
@@ -932,7 +937,7 @@
             // if(compare>hd){
             //
             // }
-        },
+        },//修复度数，防止大角度转动
         processViewData:function(n){
             var _self = this;
             if(n=="s"){
@@ -969,9 +974,13 @@
             }
         },//开启工具条图标
         account:function(){
+            if(this.gameData.haveAccount){//已经结算过成绩，防止再次播放动画
+                return;
+            }
             var _self = this;
             var l = this.gameData.haveFind.length;
             if(l==3){
+                this.gameData.haveAccount = true;
                 _self.banTouchVr();
                 $(".btn-txt").fo(function(){//图标底下文字隐去
                     $(".ui-white-circle").css({"opacity":"1"});//按钮变白
@@ -1168,33 +1177,46 @@
 
         },//普通热点
         exit:function(){
+
             var _self = this;
-            var dreamer = $(".P_dreamer");
-            dreamer.removeClass("none");
-            _self.processViewData(4);//处理视角
-            Math.animation([_self.view.h,_self.view.v],
-                [_self.view.endH,_self.view.endV],
-                1000,
-                'Sine.easeInOut',
-                function (value) {
-                    _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
-                    _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
-                },
-                function(){
-                    $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
-                    dreamer.css({"opacity":"1"});//画面变白
-                    setTimeout(function(){
-                        $(".P_vr").addClass("none");
-                        $(".P_result").removeClass("none")
-                        _self.top();
-                        dreamer.css({"opacity":"0"})
-                    },1000);
-                    setTimeout(function(){
-                        dreamer.addClass("none");
-                    },2000);
-                    // _self.presult();
-                }
-            );
+            if(!_self.gameData.haveTouchExit){
+                _self.gameData.haveTouchExit = true;
+                _self.layer.$container4.removeClass("none");
+                _self.layer.$page.fi(function(){
+                    _self.swiper2.startAutoplay();
+                });
+                _self.swiper2.update();//swiper更新
+                _self.swiper2.slideTo(1,0);
+            }
+            else{
+                var dreamer = $(".P_dreamer");
+                dreamer.removeClass("none");
+                _self.processViewData(4);//处理视角
+                Math.animation([_self.view.h,_self.view.v],
+                    [_self.view.endH,_self.view.endV],
+                    1000,
+                    'Sine.easeInOut',
+                    function (value) {
+                        _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+                        _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
+                    },
+                    function(){
+                        $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
+                        dreamer.css({"opacity":"1"});//画面变白
+                        setTimeout(function(){
+                            $(".P_vr").addClass("none");
+                            $(".P_result").removeClass("none")
+                            _self.top();
+                            dreamer.css({"opacity":"0"})
+                        },1000);
+                        setTimeout(function(){
+                            dreamer.addClass("none");
+                        },2000);
+                        // _self.presult();
+                    }
+                );
+            }
+
             
             // this.pvrleave();
             // this.presult();
@@ -1206,14 +1228,14 @@
             this.swiper1 = new Swiper ('.op-icons .swiper-container',{
                 direction : 'vertical',//纵向
                 onlyExternal : true,//不可touch和mouse
-                autoplay : 1500,//自动播放
+                autoplay : 2000,//自动播放
                 loop : true,//循环
                 // slideClass:"slideClass1"
             });
             this.swiper2 = new Swiper ('.op-white1 .swiper-container',{
                 direction : 'vertical',//纵向
                 onlyExternal : true,//不可touch和mouse
-                autoplay : 1500,//自动播放
+                autoplay : 2000,//自动播放
                 loop : true,//循环
             });
         },
@@ -1397,7 +1419,7 @@
                 },1000);
             };
             var EndHandler2 = function(){
-                var str = "如何解决";
+                var str = "如何解决?";
                 _self.print(str,$(".op-printer"),150,function(){
                     $(".baidu").addClass("ani-baidu");
                 });
