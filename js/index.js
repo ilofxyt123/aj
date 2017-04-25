@@ -303,7 +303,7 @@
             this.tp = {
                 cb:undefined,
                 duration:"",
-                cls:""
+                cls:"",
             };
             this.tp.cls = "ani-fadeIn";
             if(arguments){
@@ -319,14 +319,14 @@
                     }
                 }
             }
-            this.on("webkitAnimationEnd",this.fiHandler.bind(this)).addClass("opacity "+this.tp.cls).removeClass("none");
-            return this;
+                this.on("webkitAnimationEnd", this.fiHandler.bind(this)).addClass("opacity " + this.tp.cls).removeClass("none");
+                return this;
         },
         fo:function(cb){
             this.tp = {
                 cb:undefined,
                 duration:"",
-                cls:""
+                cls:"",
             };
             this.tp.cls = "ani-fadeOut";
             if(arguments){
@@ -341,8 +341,8 @@
                     }
                 }
             }
-            this.on("webkitAnimationEnd",this.foHandler.bind(this)).addClass(this.tp.cls);
-            return this;
+                this.on("webkitAnimationEnd",this.foHandler.bind(this)).addClass(this.tp.cls);
+                return this;
         }
     });
     var Utils = new function(){
@@ -640,7 +640,7 @@
             success:false,
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
-            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作半熟芝士，<br>帮我找一下奶油干酪吧",
+            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作半熟芝士，<br>帮我找一下原材料吧",
             haveFind :[],
             $toolIcon:$(".btn3"),//厨之奥义
         };
@@ -1081,7 +1081,7 @@
                             break;
                     }
                     _self.allowTouchVr();//允许touch
-                    $(".P_layer").fi(function(){
+                    $(".P_layer").fi(300,function(){
                         _self.swiper1.startAutoplay();
                     });//layer出现
                     _self.swiper1.update();
@@ -1239,7 +1239,7 @@
             this.swiper2 = new Swiper ('.op-white1 .swiper-container',{
                 direction : 'vertical',//纵向
                 onlyExternal : true,//不可touch和mouse
-                autoplay : 2000,//自动播放
+                autoplay : 2500,//自动播放
                 loop : true,//循环
             });
         },
@@ -1377,7 +1377,7 @@
 
             /////////P_layer//////////
             $(".P_layer").on("touchend",function () {
-                $(this).fo(function(){
+                $(this).fo(300,function(){
                     _self.account();
                     $(".ui-txtBox").addClass("none");
                 });

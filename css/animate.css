@@ -55,7 +55,14 @@
         opacity:0;
     }
 }
-
+.ani-fadeOut300 {
+    -webkit-animation:ani-fadeOut 0.3s linear 0s 1  forwards;
+    animation:ani-fadeOut 0.3s linear 0s 1  forwards;
+}
+.ani-fadeOut400 {
+    -webkit-animation:ani-fadeOut 0.4s linear 0s 1  forwards;
+    animation:ani-fadeOut 0.4s linear 0s 1  forwards;
+}
 .ani-fadeOut {
     -webkit-animation:ani-fadeOut 0.5s linear 0s 1  forwards;
     animation:ani-fadeOut 0.5s linear 0s 1  forwards;
@@ -102,6 +109,14 @@
 .ani-fadeIn {
     -webkit-animation:ani-fadeIn 0.5s linear  1  forwards;
     animation:ani-fadeIn 0.5s linear 1 forwards;
+}
+.ani-fadeIn300 {
+    -webkit-animation:ani-fadeIn 0.3s linear  1  forwards;
+    animation:ani-fadeIn 0.3s linear 1 forwards;
+}
+.ani-fadeIn400 {
+    -webkit-animation:ani-fadeIn 0.4s linear  1  forwards;
+    animation:ani-fadeIn 0.4s linear 1 forwards;
 }
 .ani-fadeIn600 {
     -webkit-animation:ani-fadeIn 0.6s linear  1  forwards;
