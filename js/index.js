@@ -622,7 +622,7 @@
         };
         this.block1 = {//视频区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
+            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:[],
             iconStr:"点击视频查看，找到我们是谁，即可获取创之视角图鉴。",
             haveFind :[],
@@ -630,24 +630,24 @@
         };
         this.block2 = {//糕点区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
-            spotStr:["芝士挞（咖啡、芒果）,恭喜您激活了密之配方","慕思（巧克力，芒果）,恭喜您激活了密之配方","椰香卷 （焦糖，抹茶）,恭喜您激活了密之配方","半熟乳酪（轻，重）,恭喜您激活了密之配方"],
+            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
+            spotStr:["芝士挞（咖啡、芒果）<br>恭喜您激活了密之配方","慕思（巧克力，芒果）<br>恭喜您激活了密之配方","椰香卷 （焦糖，抹茶）<br>恭喜您激活了密之配方","半熟乳酪（轻，重）<br>恭喜您激活了密之配方"],
             iconStr:"点击展柜中的产品查看配方即可获取密之配方图鉴",
             haveFind :[],
             $toolIcon:$(".btn2"),//密之配方
         };
         this.block3 = {//厨师区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找其他互动区域",
-            spotStr:["恭喜您成功选对材料：安佳奶油干酪","恭喜您成功选对材料：安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
-            iconStr:"芝士蛋糕越来越受到年轻一代的喜爱，我正在制作半熟芝士，帮我找一下奶油干酪吧",
+            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
+            spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
+            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作半熟芝士，<br>帮我找一下奶油干酪吧",
             haveFind :[],
             $toolIcon:$(".btn3"),//厨之奥义
         };
         this.block4 = {
             spotStr:["奶油泡芙","抹茶饼干"],
         };
-        this.WhitePointStr = ["与销售面对面沟通，进一步商业洽谈","查看更多商业解决方案，联系现场销售获得内容","流动播放品牌产品和渠道资讯，更有互动惊喜等待大家","活动现场有新品发布，欢迎来到活动现场一同见证!","提供前店后厨的全套解决方案","最红最潮流的配方演示"];
+        this.WhitePointStr = ["与销售面对面沟通，进一步<br>商业洽谈","查看更多商业解决方案，联系<br>现场销售获得内容","流动播放品牌产品和渠道资讯，更有互动惊喜等待大家","活动现场有新品发布，欢迎来<br>到活动现场一同见证!","提供前店后厨的全套解决方案","最红最潮流的配方演示"];
 
 
         this.krpano;
@@ -983,18 +983,22 @@
                 this.gameData.haveAccount = true;
                 _self.banTouchVr();
                 $(".btn-txt").fo(function(){//图标底下文字隐去
-                    $(".ui-white-circle").css({"opacity":"1"});//按钮变白
+                    // $(".ui-white-circle").css({"opacity":"1"});//按钮变白
+                    $(".btn1").css({"transform":"translateX(190px)"});
+                    $(".btn3").css({"transform":"translateX(-190px)"});
                     setTimeout(function(){//白完以后向中间移动
-                        $(".btn1").css({"transform":"translateX(190px)"});
-                        $(".btn3").css({"transform":"translateX(-190px)"});
-                        $(".btnV").removeClass("none");//钥匙图标出现
+                        $(".btnV,.btnV-txt").fi();//钥匙图标出现
+                        $(".btn1,.btn2,.btn3").fo();
                     },1000);
                     setTimeout(function(){
-                        $(".btn1,.btn2,.btn3").addClass("none");
-                        $(".btnV .ui-white-circle").css({"opacity":"0"});
-                        $(".btnV-txt").fi(1000,function(){
-                            _self.allowTouchVr();
-                        });
+                        // $(".btn1,.btn2,.btn3").addClass("none");
+                        // $(".btnV .ui-white-circle").css({"opacity":"0"});
+                        // $(".btnV-txt").fi(1000,function(){
+                        //     _self.allowTouchVr();
+                        // });
+
+                        _self.allowTouchVr();
+
                     },2000)
 
                 });
