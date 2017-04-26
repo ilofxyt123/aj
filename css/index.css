@@ -49,8 +49,8 @@ html,body{
             .bubble2{left:133px;top:-30px;width:28px;}
             .bubble3{left:42px;top:82px;width:39px;}
             .bubble4{left:175px;top:30px;width:22px;}
-        .num{width:100px;position: absolute;text-align: center;height:30px;line-height:30px;left:50%;margin-left:-50px;top:355px;color:white;}
-        .load-txt{bottom:0;left:50%;margin-left:-10px;}
+        .num{width:100px;position: absolute;text-align: center;height:30px;line-height:30px;left:50%;margin-left:-50px;top:505px;color:white;}
+        .load-txt{top:360px;left:50%;margin-left:-10px;}
     .load-logo{top:900px;left:50%;margin-left:-58px;}
 
 .top{width:100%;position: absolute;top:16px;height:30px;z-index:99;}

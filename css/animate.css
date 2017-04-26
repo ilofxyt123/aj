@@ -345,8 +345,8 @@
 }
 
 .ani-pop {
-    -webkit-animation:ani-pop 0.3s ease-out 1 forwards;
-    animation:ani-pop 0.3s ease-out 1 forwards;
+    -webkit-animation:ani-pop 0.2s ease-out 1 forwards;
+    animation:ani-pop 0.2s ease-out 1 forwards;
 }
 
 @-webkit-keyframes ani-pop2{
@@ -371,8 +371,8 @@
 }
 
 .ani-pop2 {
-    -webkit-animation:ani-pop2 1s ease-out 1 forwards;
-    animation:ani-pop2 1s ease-out 1 forwards;
+    -webkit-animation:ani-pop2 0.5s ease-out 1 forwards;
+    animation:ani-pop2 0.5s ease-out 1 forwards;
 }
 
 .ani-toBig {

@@ -508,7 +508,7 @@
             startV:0,//起始纵坐标
             endH:0,//终点横坐标
             endV:0,//终点纵坐标
-            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0},{h:38.374,v:16.115}]//多个需要转到的角度
+            point:[{h:1.921, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0},{h:38.374,v:16.115}]//多个需要转到的角度
         };
 
         this.bgm ={
@@ -735,8 +735,8 @@
         rotateView:function(){
             var _self = this;
             setTimeout(function(){
-                Math.animation([-12],
-                    [348],
+                Math.animation([1.921],
+                    [361.921],
                     6500,
                     'Sine.easeInOut',
                     function (value) {
