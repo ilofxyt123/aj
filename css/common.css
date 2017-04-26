@@ -161,3 +161,8 @@ a, button, input {
 .scale03{
     transform:scale(0.3);
 }
+
+.strong{
+    color:yellow;
+    font-size:30px;
+}

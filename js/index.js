@@ -640,7 +640,7 @@
             success:false,
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
-            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作半熟芝士，<br>帮我找一下原材料吧",
+            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>原材料</strong>吧",
             haveFind :[],
             $toolIcon:$(".btn3"),//厨之奥义
         };
@@ -1488,9 +1488,9 @@
             $(".videoBox").on("touchend",function(){
                 if(ios||!ios){
                     if(_self.V.isPlay){
-                        _self.V.obj.pause();
+                        // _self.V.obj.pause();
                         _self.V.isPlay = false;
-                        $(".play-btn").fi();
+                        // $(".play-btn").fi();
                     }
                     else{
                         _self.V.obj.play();
