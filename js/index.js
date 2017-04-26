@@ -508,7 +508,7 @@
             startV:0,//起始纵坐标
             endH:0,//终点横坐标
             endV:0,//终点纵坐标
-            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0},{h:38.775,v:0}]//多个需要转到的角度
+            point:[{h:-11.909, v:0},{h:133.793, v:0},{h:216.242, v:0},{h:314.177, v:0},{h:38.374,v:16.115}]//多个需要转到的角度
         };
 
         this.bgm ={
@@ -1458,6 +1458,11 @@
                 }
             });
             $(".mask-btn3").on("touchend",function(){
+                if(_self.V.isPlay){
+                    _self.V.obj.pause();
+                    _self.V.isPlay = false;
+                    $(".play-btn").fi();
+                }
                 $(".blue-err").addClass("none");
                 if(!_self.block1.success){
                     _self.getKey(1);

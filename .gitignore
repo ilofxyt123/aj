@@ -15,3 +15,7 @@ js/browser.js
 *.pptx
 js/swiper.jquery.min.js
 css/swiper.min.css
+tracking/TrackingBehavior.js
+tracking/TrackingBehavior1.2.doc
+tracking/TrackingBehavior_1_.js
+js/index.min.js
