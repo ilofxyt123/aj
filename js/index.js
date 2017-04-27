@@ -641,7 +641,7 @@
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
             iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>原材料</strong>吧",
-            haveFind :[],
+            haveFindNum :0,
             $toolIcon:$(".btn3"),//厨之奥义
         };
         this.block4 = {
@@ -755,7 +755,6 @@
         setIconLayerTxt:function(n){
             switch(n){
                 case "s"://迎宾区
-                    console.log("迎宾区文字不需要设置");
                     break;
                 case "1"://视频区
                     if(this.block1.success){//找到物品后，视频区域icon文字
@@ -783,6 +782,7 @@
                     break;
             };
         },//设置高亮icon提示文字
+
         setSpotLayerTxt:function(n){
             switch(n){
                 ////////////////////////糕点区域/////////////////////////
@@ -793,6 +793,7 @@
                     else{
                         this.getKey(2);
                         this.layer.$txt2.html(this.block2.spotStr[0]);
+                        this.showBlockTxt();
                     }
                     break;
                 case "22":
@@ -802,6 +803,7 @@
                     else{
                         this.getKey(2);
                         this.layer.$txt2.html(this.block2.spotStr[1]);
+                        this.showBlockTxt();
                     }
                     break;
                 case "23":
@@ -811,6 +813,7 @@
                     else{
                         this.getKey(2);
                         this.layer.$txt2.html(this.block2.spotStr[2]);
+                        this.showBlockTxt();
                     }
                     break;
                 case "24":
@@ -820,6 +823,7 @@
                     else{
                         this.getKey(2);
                         this.layer.$txt2.html(this.block2.spotStr[3]);
+                        this.showBlockTxt();
                     }
                     break;
                 ////////////////////////糕点区域/////////////////////////
@@ -966,10 +970,15 @@
                     $(".btn2 .light").removeClass("none");
                     break;
                 case 3:
-                    this.block3.success = true;
-                    _self.gameData.haveFind.push(_self.gameData.prize[2]);
-                    $(".btn3 .default").addClass("none");
-                    $(".btn3 .light").removeClass("none");
+                    if(this.block3.haveFindNum<1){
+                        this.block3.haveFindNum++;
+                    }
+                    else{
+                        this.block3.success = true;
+                        _self.gameData.haveFind.push(_self.gameData.prize[2]);
+                        $(".btn3 .default").addClass("none");
+                        $(".btn3 .light").removeClass("none");
+                    }
                     break;
             }
         },//开启工具条图标
@@ -1046,6 +1055,9 @@
                 }
             );
         },//热点闪烁
+        playMusic:function(id){
+            Media.playMedia(id);
+        },
         //////////////辅助类函数/////////////
 
         //////////////kp对外/////////////
@@ -1193,37 +1205,45 @@
                 _self.swiper2.slideTo(1,0);
             }
             else{
-                var dreamer = $(".P_dreamer");
-                dreamer.removeClass("none");
-                _self.processViewData(4);//处理视角
-                Math.animation([_self.view.h,_self.view.v],
-                    [_self.view.endH,_self.view.endV],
-                    1000,
-                    'Sine.easeInOut',
-                    function (value) {
-                        _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
-                        _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
-                    },
-                    function(){
-                        $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
-                        dreamer.css({"opacity":"1"});//画面变白
-                        setTimeout(function(){
-                            $(".P_vr").addClass("none");
-                            $(".P_result").removeClass("none")
-                            _self.top();
-                            dreamer.css({"opacity":"0"})
-                        },1000);
-                        setTimeout(function(){
-                            dreamer.addClass("none");
-                        },2000);
-                        // _self.presult();
-                    }
-                );
+                _self.playExitAnimation()
             }
-
-            
             // this.pvrleave();
             // this.presult();
+        },
+        playExitAnimation:function(){
+            var _self = this;
+            var dreamer = $(".P_dreamer");
+            dreamer.removeClass("none");
+            _self.processViewData(4);//处理视角
+            Math.animation([_self.view.h,_self.view.v],
+                [_self.view.endH,_self.view.endV],
+                1000,
+                'Sine.easeInOut',
+                function (value) {
+                    _self.krpano.call("set(view[v2].hlookat,'"+value[0]+"');");
+                    _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
+                },
+                function(){
+                    $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
+                    dreamer.css({"opacity":"1"});//画面变白
+                    setTimeout(function(){
+                        $(".P_vr").addClass("none");
+                        $(".P_result").removeClass("none")
+                        _self.top();
+                        dreamer.css({"opacity":"0"})
+                    },1000);
+                    setTimeout(function(){
+                        dreamer.addClass("none");
+                    },2000);
+                    // _self.presult();
+                }
+            );
+        },
+        showBlockTxt:function(){
+            this.krpano.call("tween(hotspot[block2_1_txt].alpha,1)");
+            this.krpano.call("tween(hotspot[block2_2_txt].alpha,1)");
+            this.krpano.call("tween(hotspot[block2_3_txt].alpha,1)");
+            this.krpano.call("tween(hotspot[block2_4_txt].alpha,1)");
         },
         //////////////kp对外/////////////
 
@@ -1327,7 +1347,7 @@
             $(".P3").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?3", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?4", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.krpano = document.getElementById("krpanoSWFObject");
