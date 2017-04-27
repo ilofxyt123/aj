@@ -461,7 +461,7 @@
             var _self = this;
             var clock = setInterval(function(){
                 if(_self.mutedEnd){
-                    Utils.g(id).play()
+                    Utils.g(id).play();
                     clearInterval(clock);
                 }
             },20)
@@ -624,7 +624,7 @@
             success:false,
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:[],
-            iconStr:"点击视频查看，找到我们是谁，即可获取创之视角图鉴。",
+            iconStr:"<strong class='strong'>点击视频</strong>查看，找到我们是谁，即可获取创之视角图鉴。",
             haveFind :[],
             $toolIcon:$(".btn1"),//创之视角
         };
@@ -641,7 +641,8 @@
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
             iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>原材料</strong>吧",
-            haveFindNum :0,
+            haveFind1 :false,
+            haveFind2 :false,
             $toolIcon:$(".btn3"),//厨之奥义
         };
         this.block4 = {
@@ -834,6 +835,7 @@
                         this.layer.$txt3.html(this.block3.successStr);
                     }
                     else{
+                        this.block3.haveFind1 = true;
                         this.getKey(3);
                         this.layer.$txt3.html(this.block3.spotStr[0]);
                     }
@@ -843,6 +845,7 @@
                         this.layer.$txt3.html(this.block3.successStr);
                     }
                     else{
+                        this.block3.haveFind2 = true;
                         this.getKey(3);
                         this.layer.$txt3.html(this.block3.spotStr[1]);
                     }
@@ -853,6 +856,7 @@
                     }
                     else{
                         this.layer.$txt3.html(this.block3.spotStr[2]);
+                        this.playMusic("wrong-msc");
                     }
                     break;
                 case "34":
@@ -861,6 +865,7 @@
                     }
                     else{
                         this.layer.$txt3.html(this.block3.spotStr[3]);
+                        this.playMusic("wrong-msc");
                     }
                     break;
                 case "35":
@@ -955,6 +960,7 @@
         },
         getKey:function(n){
             var _self = this;
+            _self.playMusic("right-msc");
             switch(n){
                 case 1:
                     this.block1.success = true;
@@ -970,10 +976,7 @@
                     $(".btn2 .light").removeClass("none");
                     break;
                 case 3:
-                    if(this.block3.haveFindNum<1){
-                        this.block3.haveFindNum++;
-                    }
-                    else{
+                    if(this.block3.haveFind1&&this.block3.haveFind2){
                         this.block3.success = true;
                         _self.gameData.haveFind.push(_self.gameData.prize[2]);
                         $(".btn3 .default").addClass("none");
@@ -996,6 +999,7 @@
                     $(".btn1").css({"transform":"translateX(190px)"});
                     $(".btn3").css({"transform":"translateX(-190px)"});
                     setTimeout(function(){//白完以后向中间移动
+                        _self.playMusic("key-msc");
                         $(".btnV,.btnV-txt").fi();//钥匙图标出现
                         $(".btn1,.btn2,.btn3").fo();
                     },1000);
@@ -1005,11 +1009,8 @@
                         // $(".btnV-txt").fi(1000,function(){
                         //     _self.allowTouchVr();
                         // });
-
                         _self.allowTouchVr();
-
                     },2000)
-
                 });
                 this.krpano.call("set(hotspot[tip_red].visible,false)");
                 this.krpano.call("set(hotspot[tip_blue].visible,true)");
@@ -1224,6 +1225,7 @@
                     _self.krpano.call("set(view[v2].vlookat,'"+value[1]+"');");
                 },
                 function(){
+                _self.playMusic("exit-msc");
                     $(".P_vr").css({"transform":"scale(3)"});//画面放大，进入门中
                     dreamer.css({"opacity":"1"});//画面变白
                     setTimeout(function(){
@@ -1327,6 +1329,7 @@
         p1:function(){
             var _self = this;
             $(".cloud").removeClass("none");
+            _self.playMusic("pop-msc");
             $(".P1").fi(function(){
                 // _self.loadVr();
             });
@@ -1418,9 +1421,9 @@
                 $(this).off("webkitAnimationEnd");
             });
             var pop3Handle1 = function(){
-                $(this).removeClass("opacity ani-pop delay06");
-                $(".pop1,.pop2").removeClass("opacity ani-pop delay02 delay04").fo();
-                $(this).off("webkitAnimationEnd",pop3Handle1).on("webkitAnimationEnd",pop3Handle2).addClass("ani-pop2");
+                $(this).removeClass("opacity ani-pop delay06");//为下一个动画做准备
+                $(".pop1,.pop2").removeClass("opacity ani-pop delay02 delay04").fo();//两个小泡消失
+                $(this).off("webkitAnimationEnd",pop3Handle1).on("webkitAnimationEnd",pop3Handle2).addClass("ani-pop2");//新的动画
             };
             var pop3Handle2 = function(){
                 $(".p1-man").addClass("ani-toBig");
@@ -1432,22 +1435,21 @@
 
             /////////P2/////////
             var EndHandler1 = function(){
-                setTimeout(function(){
-                    $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig");
-                    setTimeout(function(){
-                        $(".p2-title1").addClass("ani-p2-t1");
-                        $(".p2-title2").addClass("ani-p2-t2");
-                        $(".p2-title3").addClass("ani-p2-t3");
-                    },1000);
+                    $(".p2-title").removeClass("opacity delay02 delay05 delay08 ani-toBig").addClass("ani-float");
                     $(".p2-title3").off("webkitAnimationEnd",EndHandler1).on("webkitAnimationEnd",EndHandler2);
-                },1000);
             };
             var EndHandler2 = function(){
+                    $(".p2-title").removeClass("ani-float");
+                    $(".p2-title1").addClass("ani-p2-t1");
+                    $(".p2-title2").addClass("ani-p2-t2");
+                    $(".p2-title3").addClass("ani-p2-t3").off("webkitAnimationEnd",EndHandler2).on("webkitAnimationEnd",EndHandler3);
+            };
+            var EndHandler3 = function(){
                 var str = "如何解决?";
-                _self.print(str,$(".op-printer"),150,function(){
+                _self.print(str,$(".op-printer"),300,function(){
                     $(".baidu").addClass("ani-baidu");
                 });
-                $(".p2-title3").off("webkitAnimationEnd",EndHandler2);
+                _self.playMusic("printer-msc");//打字音效
             };
             $(".p2-title3").on("webkitAnimationEnd",EndHandler1);
             $(".baidu").on("webkitAnimationEnd",function(){
@@ -1470,11 +1472,13 @@
             $(".mask-btn1").on("touchend",function(){
                 if(!_self.block1.success){
                     $(".blue-err").removeClass("none");
+                    _self.playMusic("wrong-msc");
                 }
             });
             $(".mask-btn2").on("touchend",function(){
                 if(!_self.block1.success){
                     $(".blue-err").removeClass("none");
+                    _self.playMusic("wrong-msc");
                 }
             });
             $(".mask-btn3").on("touchend",function(){

@@ -375,6 +375,34 @@
     animation:ani-pop2 0.5s ease-out 1 forwards;
 }
 
+@-webkit-keyframes ani-float{
+    0% {
+        -webkit-transform:  translateY(0);
+    }
+    50%{
+        -webkit-transform:  translateY(10px);
+    }
+    100% {
+        -webkit-transform:  translateY(0);
+    }
+}
+@keyframes ani-float{
+    0% {
+        transform:  translateY(0);
+    }
+    50%{
+        transform:  translateY(10px);
+    }
+    100% {
+       transform:  translateY(0);
+    }
+}
+
+.ani-float {
+    -webkit-animation:ani-float 2s linear 1 forwards;
+    animation:ani-float 2s linear 1 forwards;
+}
+
 .ani-toBig {
     animation: ani-toBig .6s ease-out 1 forwards;
     -webkit-animation: ani-toBig .6s ease-out 1 forwards;

@@ -113,7 +113,7 @@
 		<hotspot name="White_2"  scale="1"  url="images/point2.png" ath="100.428"  atv="1.335"    imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
 		<hotspot name="White_3"  scale="1"  url="images/point2.png" ath="117.971"  atv="14.531"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
 		<hotspot name="White_4"  scale="1"  url="images/point2.png" ath="163.099"  atv="22.518"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
-		<hotspot name="White_5"  scale="1"  url="images/point2.png" ath="-104.674" atv="20.339"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<hotspot name="White_5"  scale="1"  url="images/point2.png" ath="-104.674" atv="20.339"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)" onclick="hotspotClick('w5')"/>
 		<hotspot name="White_6"  scale="1"  url="images/point2.png" ath="-55.489"  atv="5.357"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
 
 		<hotspot name="White_txt1"  scale="1"  url="images/test_9.png" ath="57.382"   atv="-10.776"/><!--白点对应文字 -->
@@ -151,10 +151,10 @@
 		<hotspot name="block3_4"    scale="1"    url="images/3d_img_13.png"   ath="-35.986" atv="12.604"   onclick="hotspotClick('34')"/>
 		<hotspot name="block3_5"    scale="0.3"  url="images/img_d.png"       ath="-35.643" atv="7.624"    onclick="hotspotClick('35')"/>
 
-		<hotspot name="block4_1_l"  scale="1"  url="images/3d_img_21.png"   ath="-87.762"  atv="9.405"  onclick="" />
-		<hotspot name="block4_1"    scale="1"  url="images/3d_img_21_1.png" ath="-87.762"  atv="9.405"  onclick="hotspotClick('41')"/>
-		<hotspot name="block4_2_l"  scale="1"  url="images/3d_img_22.png"   ath="-79.307"  atv="8.218"  onclick="" />
-		<hotspot name="block4_2"    scale="1"  url="images/3d_img_22_1.png" ath="-79.307"  atv="8.218"  onclick="hotspotClick('42')"/>
+		<hotspot name="block4_1_l"  scale="1.5"  url="images/3d_img_21.png"   ath="-87.762"  atv="9.405"  onclick="" />
+		<hotspot name="block4_1"    scale="1.5"  url="images/3d_img_21_1.png" ath="-87.762"  atv="9.405"  onclick="hotspotClick('41')"/>
+		<hotspot name="block4_2_l"  scale="1.5"  url="images/3d_img_22.png"   ath="-79.307"  atv="8.218"  onclick="" />
+		<hotspot name="block4_2"    scale="1.5"  url="images/3d_img_22_1.png" ath="-79.307"  atv="8.218"  onclick="hotspotClick('42')"/>
 
 
 
