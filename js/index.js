@@ -996,8 +996,11 @@
                 _self.banTouchVr();
                 $(".btn-txt").fo(function(){//图标底下文字隐去
                     // $(".ui-white-circle").css({"opacity":"1"});//按钮变白
+                    $(".cool").fi();
                     $(".btn1").css({"transform":"translateX(190px)"});
                     $(".btn3").css({"transform":"translateX(-190px)"});
+                    $(".bigCool").removeClass("none");
+
                     setTimeout(function(){//白完以后向中间移动
                         _self.playMusic("key-msc");
                         $(".btnV,.btnV-txt").fi();//钥匙图标出现
@@ -1195,21 +1198,23 @@
         },//普通热点
         exit:function(){
 
-            var _self = this;
-            if(!_self.gameData.haveTouchExit){
-                _self.gameData.haveTouchExit = true;
-                _self.layer.$container4.removeClass("none");
-                _self.layer.$page.fi(function(){
-                    _self.swiper2.startAutoplay();
-                });
-                _self.swiper2.update();//swiper更新
-                _self.swiper2.slideTo(1,0);
-            }
-            else{
-                _self.playExitAnimation()
-            }
+            // var _self = this;
+            // if(!_self.gameData.haveTouchExit){
+            //     _self.gameData.haveTouchExit = true;
+            //     _self.layer.$container4.removeClass("none");
+            //     _self.layer.$page.fi(function(){
+            //         _self.swiper2.startAutoplay();
+            //     });
+            //     _self.swiper2.update();//swiper更新
+            //     _self.swiper2.slideTo(1,0);
+            // }
+            // else{
+            //     _self.playExitAnimation()
+            // }
             // this.pvrleave();
             // this.presult();
+
+            $(".blue-mask3").fi();
         },
         playExitAnimation:function(){
             var _self = this;
@@ -1258,12 +1263,12 @@
                 loop : true,//循环
                 // slideClass:"slideClass1"
             });
-            this.swiper2 = new Swiper ('.op-white1 .swiper-container',{
-                direction : 'vertical',//纵向
-                onlyExternal : true,//不可touch和mouse
-                autoplay : 2500,//自动播放
-                loop : true,//循环
-            });
+            // this.swiper2 = new Swiper ('.op-white1 .swiper-container',{
+            //     direction : 'vertical',//纵向
+            //     onlyExternal : true,//不可touch和mouse
+            //     autoplay : 2500,//自动播放
+            //     loop : true,//循环
+            // });
         },
         start:function(){
             Utils.preloadImage(this.ImageList,function(){this.loadingOver = true;}.bind(this));
@@ -1512,9 +1517,9 @@
             $(".videoBox").on("touchend",function(){
                 if(ios||!ios){
                     if(_self.V.isPlay){
-                        // _self.V.obj.pause();
+                        _self.V.obj.pause();
                         _self.V.isPlay = false;
-                        // $(".play-btn").fi();
+                        $(".play-btn").fi();
                     }
                     else{
                         _self.V.obj.play();
@@ -1529,6 +1534,11 @@
 
             $(".blue2xx").on("touchend",function(){
                 $(".blue-mask2").fo();
+            });
+            $(".blue3xx").on("touchend",function(){
+                $(".blue-mask3").fo(function(){
+                    _self.playExitAnimation();
+                });
             });
             /////////blue-mask//////////
 
@@ -1552,11 +1562,11 @@
             $(window).on("orientationchange",function(e){
                 if(window.orientation == 0 || window.orientation == 180 )
                 {
-                    $(".hp").hide();
+                    $(".hp").delay(100).fadeOut();
                 }
                 else if(window.orientation == 90 || window.orientation == -90)
                 {
-                    $(".hp").show();
+                    $(".hp").delay(100).fadeIn();
                 }
             });
         },

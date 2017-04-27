@@ -200,6 +200,64 @@
     -webkit-animation:ani-Rotate2 8s linear 0s infinite forwards;
     animation:ani-Rotate2 8s linear 0s infinite forwards;
 }
+
+@-webkit-keyframes ani-Rotate3 {
+    0%{
+        -webkit-transform:rotate(0deg);
+        opacity:1;
+    }
+    50% {
+        -webkit-transform:rotate(-180deg);
+        opacity:0;
+    }
+    100% {
+        -webkit-transform:rotate(-360deg);
+        opacity:1;
+    }
+}
+@keyframes ani-Rotate3 {
+    0%{
+        transform:rotate(0deg);
+        opacity:1;
+    }
+    50% {
+        transform:rotate(-180deg);
+        opacity:0;
+    }
+    100% {
+        transform:rotate(-360deg);
+        opacity:1;
+    }
+}
+
+.ani-Rotate3{
+    -webkit-animation:ani-Rotate3 1s linear 0s infinite forwards;
+    animation:ani-Rotate3 1s linear 0s infinite forwards;
+}
+
+@-webkit-keyframes ani-bigCool {
+    0%{
+        -webkit-transform:rotate(0deg) scale(1);
+    }
+
+    100% {
+        -webkit-transform:rotate(-360deg) scale(0.01);
+    }
+}
+@keyframes ani-bigCool {
+    0%{
+        transform:rotate(0deg) scale(1);
+    }
+
+    100% {
+        transform:rotate(-360deg) scale(0.01);
+    }
+}
+
+.ani-bigCool{
+    -webkit-animation:ani-bigCool 1.5s ease-Out 0s 1 forwards;
+    animation:ani-bigCool 1.5s ease-Out 0s 1 forwards;
+}
 .ani-bgmPause{
     animation-play-state:paused;
     -webkit-animation-play-state:paused;
