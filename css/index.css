@@ -34,7 +34,7 @@ html,body{
 
 
 .P_bg{}
-    .cloudR{left:557px;top:33px;}
+    .cloudR{left:557px;top:72px;}
     .cloudL{right:592px;top:170px;}
     .bgBlock{width:100%;height:100%;position: absolute;}
 
@@ -55,6 +55,7 @@ html,body{
 
 .top{width:100%;position: absolute;top:16px;height:30px;z-index:99;}
     .logo{left:30px;top:0;}
+    .music-btn{right:40px;top:15px;}
 
 .P1{}
     .p1-man{left:205px;top:90px;}
@@ -124,7 +125,7 @@ html,body{
         .blue2xx{top:20px;right:25px;z-index:2;}
 
     .blue-mask3{width:100%;height:100%;position: absolute;z-index:10;background-color:rgba(2,56,102,0.9);}
-        .blue-mask3-txt{left:50%;margin-left:-220px;top:120px;}
+        .blue-mask3-txt{left:0;top:120px;}
         .blue3xx{top:20px;right:25px;z-index:2;}
     .bigCool{bottom:-200px;left:20px;z-index:10;}
 

@@ -97,7 +97,7 @@
 		<preview url="panos/2.tiles/preview.jpg" />
 
 		<image>
-			<cube url="panos/2.tiles/pano_%s.jpg?v1" />
+			<cube url="panos/2.tiles/pano_%s.jpg?v2" />
 
 			<cube url="panos/2.tiles/mobile/pano_%s.jpg" devices="mobile" />
 		</image>

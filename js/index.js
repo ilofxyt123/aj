@@ -1407,12 +1407,12 @@
 
         playbgm:function(){
             Media.playMedia(this.bgm.obj.id);
-            this.bgm.button.addClass("ani-bgmRotate");
+            this.bgm.button.attr("src","images/music.gif");
             this.bgm.isPlay = true;
         },
         pausebgm:function(){
             this.bgm.obj.pause();
-            this.bgm.button.removeClass("ani-bgmRotate");
+            this.bgm.button.attr("src","images/music.png");
             this.bgm.isPlay = false;
         },
         addEvent:function(){
@@ -1613,6 +1613,7 @@ $(function(){
     // main.test();
     main.start();
     main.addEvent();
+    main.playbgm();
 });
 
 
