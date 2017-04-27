@@ -1355,7 +1355,7 @@
             $(".P3").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?4", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?5", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.krpano = document.getElementById("krpanoSWFObject");
@@ -1529,6 +1529,15 @@
                 }
                 else{
                     console.log("安卓");
+                }
+            });
+
+            $(".bluexx").on("touchend",function(){
+                $(".blue-mask").fo();
+                if(_self.V.isPlay){
+                    _self.V.obj.pause();
+                    _self.V.isPlay = false;
+                    $(".play-btn").fi();
                 }
             });
 

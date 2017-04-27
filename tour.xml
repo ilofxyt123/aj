@@ -109,19 +109,19 @@
 
 
 
-		<hotspot name="White_1"  scale="1"  url="images/point2.png" ath="57.396"   atv="-5.771"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/><!--白点 -->
-		<hotspot name="White_2"  scale="1"  url="images/point2.png" ath="100.428"  atv="1.335"    imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
-		<hotspot name="White_3"  scale="1"  url="images/point2.png" ath="117.971"  atv="14.531"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
-		<hotspot name="White_4"  scale="1"  url="images/point2.png" ath="163.099"  atv="22.518"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<!--<hotspot name="White_1"  scale="1"  url="images/point2.png" ath="57.396"   atv="-5.771"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>&lt;!&ndash;白点 &ndash;&gt;-->
+		<!--<hotspot name="White_2"  scale="1"  url="images/point2.png" ath="100.428"  atv="1.335"    imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>-->
+		<!--<hotspot name="White_3"  scale="1"  url="images/point2.png" ath="117.971"  atv="14.531"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>-->
+		<!--<hotspot name="White_4"  scale="1"  url="images/point2.png" ath="163.099"  atv="22.518"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>-->
 		<hotspot name="White_5"  scale="1"  url="images/point2.png" ath="-104.674" atv="20.339"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)" onclick="hotspotClick('w5')"/>
-		<hotspot name="White_6"  scale="1"  url="images/point2.png" ath="-55.489"  atv="5.357"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>
+		<!--<hotspot name="White_6"  scale="1"  url="images/point2.png" ath="-55.489"  atv="5.357"   imagewidth="34"  imageheight="34" onloaded="do_crop_animation(34,34,7)"/>-->
 
-		<hotspot name="White_txt1"  scale="1"  url="images/test_9.png" ath="57.382"   atv="-10.776"/><!--白点对应文字 -->
-		<hotspot name="White_txt2"  scale="1"  url="images/test_8.png" ath="104.253"  atv="-14.242"/>
-		<hotspot name="White_txt3"  scale="1"  url="images/test_6.png" ath="130.906"  atv="11.359"/>
-		<hotspot name="White_txt4"  scale="1"  url="images/test_6.png" ath="163.817"  atv="16.428"/>
-		<hotspot name="White_txt5"  scale="1"  url="images/test_7.png" ath="-106.176" atv="14.376"/>
-		<hotspot name="White_txt6"  scale="1"  url="images/test_5.png" ath="-56.290"  atv="-0.635"/>
+		<!--<hotspot name="White_txt1"  scale="1"  url="images/test_9.png" ath="57.382"   atv="-10.776"/>&lt;!&ndash;白点对应文字 &ndash;&gt;-->
+		<!--<hotspot name="White_txt2"  scale="1"  url="images/test_8.png" ath="104.253"  atv="-14.242"/>-->
+		<!--<hotspot name="White_txt3"  scale="1"  url="images/test_6.png" ath="130.906"  atv="11.359"/>-->
+		<!--<hotspot name="White_txt4"  scale="1"  url="images/test_7.png" ath="163.817"  atv="16.428"/>-->
+		<!--<hotspot name="White_txt5"  scale="1"  url="images/test_7.png" ath="-106.176" atv="14.376"/>-->
+		<!--<hotspot name="White_txt6"  scale="1"  url="images/test_5.png" ath="-56.290"  atv="-0.635"/>-->
 
 		<hotspot name="block1_red"    scale="0.7"  url="images/3d_img_2_1.png" ath="133.203"  atv="-14.235"  onclick="iCon('1')"/><!-- 视频区高亮icon -->
 		<hotspot name="block1_video"  scale="0.4"  url="images/black.png"      ath="133.185"  atv="-1.848"  onclick="hotspotClick('11')"/>
