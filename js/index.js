@@ -521,6 +521,7 @@
         this.picUrl = "images/";//图片路径
 
         this.ImageList = [
+            this.picUrl+"3d_img_0.png",
             this.picUrl+"3d_img_1.png",
             this.picUrl+"3d_img_2.png",
             this.picUrl+"3d_img_2_1.png",
@@ -550,6 +551,8 @@
             this.picUrl+"3d_img_15.png",
             this.picUrl+"3d_img_15_1.png",
             this.picUrl+"3d_img_15_3.png",
+            this.picUrl+"3d_img_15_3_1.png",
+            this.picUrl+"3d_img_15_3_2.png",
             this.picUrl+"3d_img_15_4.png",
             this.picUrl+"3d_img_16.png",
             this.picUrl+"3d_img_16_1.png",
@@ -560,6 +563,7 @@
             this.picUrl+"3d_img_18.png",
             this.picUrl+"3d_img_18_1.png",
             this.picUrl+"3d_img_18_2.png",
+            this.picUrl+"3d_img_18_3.png",
             this.picUrl+"3d_img_19.png",
             this.picUrl+"3d_img_19_1.png",
             this.picUrl+"3d_img_20.png",
@@ -568,8 +572,10 @@
             this.picUrl+"3d_img_21_1.png",
             this.picUrl+"3d_img_22.png",
             this.picUrl+"3d_img_22_1.png",
+            this.picUrl+"3d_img_22_2.png",
             this.picUrl+"black.png",
             this.picUrl+"img_d.png",
+            this.picUrl+"light.png",
             this.picUrl+"load_img_1.png",
             this.picUrl+"load_img_2.png",
             this.picUrl+"load_img_3.png",
@@ -596,11 +602,23 @@
             this.picUrl+"p4_img_3.png",
             this.picUrl+"p4_img_4.png",
             this.picUrl+"p4_img_5.png",
+            this.picUrl+"p4_img_5_1.png",
             this.picUrl+"p4_img_6.png",
             this.picUrl+"p5_img_1.png",
             this.picUrl+"phone.png",
+            this.picUrl+"point2.png",
             this.picUrl+"poster.png",
-            this.picUrl+"weile.png"
+            this.picUrl+"weile.png",
+            this.picUrl+"test_1.png",
+            this.picUrl+"test_2.png",
+            this.picUrl+"test_3.png",
+            this.picUrl+"test_4.png",
+            this.picUrl+"test_5.png",
+            this.picUrl+"test_6.png",
+            this.picUrl+"test_7.png",
+            this.picUrl+"test_8.png",
+            this.picUrl+"test_9.png",
+            this.picUrl+"test_20.png",
         ];
 
         this.gameData = {
