@@ -658,7 +658,7 @@
             success:false,
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
-            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>原材料</strong>吧",
+            iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>2种原材料</strong>吧",
             haveFind1 :false,
             haveFind2 :false,
             $toolIcon:$(".btn3"),//厨之奥义
@@ -1320,9 +1320,11 @@
         },
         startCallback:function(){
             var _self = this;
+            _self.loadVr();
             setTimeout(function(){
                 _self.p1();
                 _self.top();
+                $(".skip-btn").fi();
                 _self.loadingleave();
             },1000)
 
@@ -1422,6 +1424,13 @@
             document.ontouchmove = function(e){e.preventDefault();};
 
             /////////P_layer//////////
+            $(".skip-btn").on("touchend",function(){
+                _self.topleave();
+                $(this).fo();
+                $(".P1,.P2,.P3").remove();
+                _self.pvr();
+
+            });
             $(".P_layer").on("touchend",function () {
                 $(this).fo(300,function(){
                     _self.account();
@@ -1440,7 +1449,6 @@
                     _self.p1leave();
                     _self.p2();
                 },1500);
-                _self.loadVr();
                 $(this).off("webkitAnimationEnd");
             });
             var pop3Handle1 = function(){
@@ -1488,6 +1496,7 @@
                 _self.p3leave();
                 _self.pvr();
                 _self.topleave();
+                $(".skip-btn").fo();
             });
             /////////P3//////////
 
@@ -1582,6 +1591,14 @@
                 if(!(/^1(3|4|5|7|8)\d{9}$/.test(number))){console.log("请输入正确的手机号!");return;};
                 _self.presultleave();
                 _self.pover();
+            });
+            $(".music-btn").on("touchend",function(){
+                if(_self.bgm.isPlay){
+                    _self.pausebgm();
+                }
+                else{
+                    _self.playbgm();
+                }
             });
             $("#phone").on("input",function(){
                 _self.limitNum($(this)[0]);

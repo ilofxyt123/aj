@@ -103,7 +103,7 @@
 		</image>
 
 		<!-- place your scene hotspots here -->
-		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="1.921" atv="-8.819"  onclick="iCon('s')" /><!-- 迎宾区高亮icon -->
+		<hotspot name="start_red"  scale="0.8"  url="images/3d_img_2_1.png" ath="3.138" atv="-8.978"  onclick="iCon('s')" /><!-- 迎宾区高亮icon -->
 		<hotspot name="tip_red"  scale="1"  url="images/3d_img_20_1.png" ath="67.206" atv="13.234"  onclick="hotspotClick('red')" visible="true"/><!--未找到所有图鉴显示为红色-->
 		<hotspot name="tip_blue"  scale="1"  url="images/3d_img_20.png" ath="67.206" atv="13.234"  onclick="exit()" visible="false"/><!--点击退出场景-->
 
