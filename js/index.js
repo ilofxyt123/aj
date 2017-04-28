@@ -657,7 +657,7 @@
         this.block3 = {//厨师区域
             success:false,
             successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
-            spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","芝士蛋挞"],
+            spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","芝士蛋挞"],
             iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>2种原材料</strong>吧",
             haveFind1 :false,
             haveFind2 :false,
@@ -1370,6 +1370,7 @@
         },
         p3:function(){
             $(".P3").fi();
+            $(".skip-btn").fo();
         },
         p3leave:function(){
             $(".P3").fo();
@@ -1425,11 +1426,9 @@
 
             /////////P_layer//////////
             $(".skip-btn").on("touchend",function(){
-                _self.topleave();
                 $(this).fo();
-                $(".P1,.P2,.P3").remove();
-                _self.pvr();
-
+                $(".P1,.P2").remove();
+                _self.p3();
             });
             $(".P_layer").on("touchend",function () {
                 $(this).fo(300,function(){
@@ -1496,7 +1495,6 @@
                 _self.p3leave();
                 _self.pvr();
                 _self.topleave();
-                $(".skip-btn").fo();
             });
             /////////P3//////////
 
