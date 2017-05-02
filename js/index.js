@@ -640,23 +640,23 @@
         };
         this.block1 = {//视频区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
+            successStr:"你已收集到此处通关卡片，请寻找<br>其他互动区域",
             spotStr:[],
-            iconStr:"<strong class='strong'>点击视频</strong>查看，找到我们是谁，即可获取创之视角图鉴。",
+            iconStr:"<strong class='strong'>点击视频</strong>查看，找到我们是谁，即可获取创之视角通关卡片。",
             haveFind :[],
             $toolIcon:$(".btn1"),//创之视角
         };
         this.block2 = {//糕点区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
+            successStr:"你已收集到此处通关卡片，请寻找<br>其他互动区域",
             spotStr:["芝士挞（咖啡、芒果）<br>恭喜您激活了密之配方","慕思（巧克力，芒果）<br>恭喜您激活了密之配方","椰香卷 （焦糖，抹茶）<br>恭喜您激活了密之配方","半熟乳酪（轻，重）<br>恭喜您激活了密之配方"],
-            iconStr:"点击展柜中的产品查看配方即可获取密之配方图鉴",
+            iconStr:"点击展柜中的产品查看配方即可获取密之配方通关卡片",
             haveFind :[],
             $toolIcon:$(".btn2"),//密之配方
         };
         this.block3 = {//厨师区域
             success:false,
-            successStr:"你已收集到此处图鉴，请寻找<br>其他互动区域",
+            successStr:"你已收集到此处通关卡片，请寻找<br>其他互动区域",
             spotStr:["恭喜您成功选对材料：<br>安佳奶油干酪","恭喜您成功选对材料：<br>安佳牧童黄油","您选的原材料是：安佳再制切达干酪，材料不对，请重新选择","您选的原材料是：安佳马苏里拉干酪，材料不对，请重新选择","芝士蛋挞"],
             iconStr:"芝士蛋糕越来越受到年轻一代<br>的喜爱，我正在制作<strong class='strong'>半熟芝士</strong>，<br>帮我找一下<strong class='strong'>2种原材料</strong>吧",
             haveFind1 :false,
@@ -925,7 +925,7 @@
                     this.layer.$txt3.html(this.WhitePointStr[5]);
                     break;
                 case "red":
-                    this.layer.$txt3.html("集齐3个图鉴获取秘钥后方可开启");
+                    this.layer.$txt3.html("集齐3个通关卡片获取秘钥后方可开启");
                     break;
                 ////////////////////////白点/////////////////////////
 
@@ -1037,7 +1037,7 @@
                 this.krpano.call("set(hotspot[tip_blue].visible,true)");
             }
             else{
-                console.log("还差"+(3-l)+"个图鉴即可打开胜利之门");
+                console.log("还差"+(3-l)+"个通关卡片即可打开胜利之门");
             }
         },//检测是否已经收集全所有
 
