@@ -649,7 +649,7 @@
         this.block2 = {//糕点区域
             success:false,
             successStr:"你已收集到此处通关卡片，请寻找<br>其他互动区域",
-            spotStr:["芝士挞（咖啡、芒果）<br>恭喜您激活了密之配方","慕思（巧克力，芒果）<br>恭喜您激活了密之配方","椰香卷 （焦糖，抹茶）<br>恭喜您激活了密之配方","半熟乳酪（轻，重）<br>恭喜您激活了密之配方"],
+            spotStr:["新款面包<br>恭喜您激活了密之配方","新款面包<br>恭喜您激活了密之配方","乳脂升级蛋糕<br>恭喜您激活了密之配方","潮流西点<br>恭喜您激活了密之配方"],
             iconStr:"点击展柜中的产品查看配方即可获取密之配方通关卡片",
             haveFind :[],
             $toolIcon:$(".btn2"),//密之配方
@@ -1048,7 +1048,7 @@
                 1000,
                 _self.flash.aniType,
                 function (value) {
-                    _self.krpano.call("set(hotspot[block2_1_l].alpha,'"+value[0]+"');");
+                    // _self.krpano.call("set(hotspot[block2_1_l].alpha,'"+value[0]+"');");
                     _self.krpano.call("set(hotspot[block2_2_l].alpha,'"+value[0]+"');");
                     _self.krpano.call("set(hotspot[block2_3_l].alpha,'"+value[0]+"');");
                     _self.krpano.call("set(hotspot[block2_4_l].alpha,'"+value[0]+"');");
@@ -1376,7 +1376,7 @@
             $(".P3").fo();
         },
         loadVr:function(){
-            embedpano({swf:"tour.swf", xml:"tour.xml?5", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
+            embedpano({swf:"tour.swf", xml:"tour.xml?6", target:"pano", html5:"prefer", mobilescale:1.0, passQueryParameters:true});
         },
         pvr:function(){
             this.krpano = document.getElementById("krpanoSWFObject");
@@ -1621,6 +1621,8 @@
 
     };
     a.Main = Main;
+    a.u=Utils;
+    a.m = Media;
 /*-----------------------------事件绑定--------------------------------*/
 }(window));
 $(function(){
