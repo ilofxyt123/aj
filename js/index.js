@@ -1530,13 +1530,18 @@
             // });
 
             $(_self.V.obj).on({
+                play:function(){
+                    _self.pausebgm();
+                },
                 pause:function(){
                     _self.V.isPlay = false;
                     $(".play-btn").fi();
+                    _self.playbgm();
                 },
                 ended:function(){
                     _self.V.isPlay = false;
                     $(".play-btn").fi();
+                    _self.playbgm();
                 }
             });
             $(".videoBox").on("touchend",function(){
